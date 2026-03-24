@@ -1,0 +1,1841 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>François Gauthier-Drapeau | Judoka Canadien</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --red: #C8102E;
+    --red-dark: #8B0A1E;
+    --gold: #D4AF37;
+    --gold-light: #F0D060;
+    --white: #F5F0E8;
+    --off-white: #EDE8DC;
+    --dark: #0A0A0A;
+    --dark2: #111111;
+    --dark3: #1A1A1A;
+    --gray: #888880;
+    --text-body: #C8C2B4;
+  }
+
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--dark);
+    color: var(--white);
+    font-family: 'Cormorant Garamond', serif;
+    overflow-x: hidden;
+    cursor: none;
+  }
+
+  /* Custom Cursor */
+  .cursor {
+    position: fixed;
+    width: 12px; height: 12px;
+    background: var(--red);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 9999;
+    transition: transform 0.15s ease, background 0.2s;
+    transform: translate(-50%, -50%);
+  }
+  .cursor-ring {
+    position: fixed;
+    width: 36px; height: 36px;
+    border: 1px solid rgba(200,16,46,0.5);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 9998;
+    transition: transform 0.35s ease, width 0.3s, height 0.3s;
+    transform: translate(-50%, -50%);
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 1.5rem 3rem;
+    background: linear-gradient(to bottom, rgba(10,10,10,0.95), transparent);
+  }
+  .nav-logo {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.4rem;
+    letter-spacing: 0.15em;
+    color: var(--white);
+    text-decoration: none;
+  }
+  .nav-logo span { color: var(--red); }
+  .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+  .nav-links a {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    color: var(--gray);
+    text-decoration: none;
+    text-transform: uppercase;
+    transition: color 0.3s;
+  }
+  .nav-links a:hover { color: var(--gold); }
+
+  /* ── HERO ── */
+  #hero {
+    position: relative;
+    height: 100vh;
+    min-height: 700px;
+    overflow: hidden;
+    display: flex;
+    align-items: flex-end;
+  }
+
+  .hero-bg {
+    position: absolute; inset: 0;
+    background: 
+      radial-gradient(ellipse at 30% 50%, rgba(200,16,46,0.12) 0%, transparent 60%),
+      radial-gradient(ellipse at 80% 20%, rgba(212,175,55,0.06) 0%, transparent 50%),
+      var(--dark);
+  }
+
+  /* Animated tatami grid */
+  .tatami-grid {
+    position: absolute; inset: 0;
+    background-image:
+      linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
+    background-size: 60px 60px;
+    animation: gridDrift 30s linear infinite;
+  }
+  @keyframes gridDrift {
+    from { transform: translate(0,0); }
+    to   { transform: translate(60px,60px); }
+  }
+
+  /* Red diagonal slash */
+  .hero-slash {
+    position: absolute;
+    top: -10%; right: 15%;
+    width: 3px; height: 130%;
+    background: linear-gradient(to bottom, transparent, var(--red), transparent);
+    transform: rotate(15deg);
+    opacity: 0.6;
+  }
+  .hero-slash-2 {
+    position: absolute;
+    top: -10%; right: 22%;
+    width: 1px; height: 130%;
+    background: linear-gradient(to bottom, transparent, rgba(212,175,55,0.4), transparent);
+    transform: rotate(15deg);
+  }
+
+  /* Big background name */
+  .hero-bg-text {
+    position: absolute;
+    top: 50%; right: -2%;
+    transform: translateY(-50%) rotate(90deg);
+    transform-origin: center;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 22vw;
+    color: rgba(255,255,255,0.03);
+    letter-spacing: 0.05em;
+    white-space: nowrap;
+    pointer-events: none;
+    user-select: none;
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 2;
+    padding: 0 3rem 6rem;
+    max-width: 900px;
+  }
+
+  .hero-eyebrow {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.35em;
+    color: var(--red);
+    text-transform: uppercase;
+    margin-bottom: 1.5rem;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.3s forwards;
+  }
+
+  .hero-name {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(5rem, 12vw, 13rem);
+    line-height: 0.88;
+    letter-spacing: 0.02em;
+    color: var(--white);
+    opacity: 0;
+    animation: fadeUp 0.9s 0.5s forwards;
+  }
+  .hero-name .red { color: var(--red); }
+
+  .hero-weight {
+    display: inline-block;
+    margin-top: 1rem;
+    font-family: 'Space Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    color: var(--gold);
+    border: 1px solid var(--gold);
+    padding: 0.4rem 1rem;
+    opacity: 0;
+    animation: fadeUp 1s 0.8s forwards;
+  }
+
+  .hero-tagline {
+    margin-top: 2rem;
+    font-size: 1.25rem;
+    font-style: italic;
+    color: var(--text-body);
+    font-weight: 300;
+    max-width: 420px;
+    line-height: 1.6;
+    opacity: 0;
+    animation: fadeUp 1s 1s forwards;
+  }
+
+  /* Floating stats in hero */
+  .hero-stats-float {
+    position: absolute;
+    right: 3rem; bottom: 6rem;
+    z-index: 2;
+    display: flex; flex-direction: column; gap: 0.5rem;
+    opacity: 0;
+    animation: fadeIn 1.2s 1.2s forwards;
+  }
+  .hero-stat-pill {
+    display: flex; align-items: center; gap: 1rem;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-left: 3px solid var(--red);
+    padding: 0.6rem 1.2rem;
+    backdrop-filter: blur(10px);
+  }
+  .hsp-num {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.8rem;
+    color: var(--gold);
+    line-height: 1;
+  }
+  .hsp-label {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.55rem;
+    letter-spacing: 0.15em;
+    color: var(--gray);
+    text-transform: uppercase;
+  }
+
+  /* Scroll indicator */
+  .scroll-indicator {
+    position: absolute;
+    bottom: 2rem; left: 50%;
+    transform: translateX(-50%);
+    display: flex; flex-direction: column; align-items: center; gap: 0.5rem;
+    opacity: 0;
+    animation: fadeIn 1s 1.5s forwards;
+  }
+  .scroll-indicator span {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.55rem;
+    letter-spacing: 0.25em;
+    color: var(--gray);
+    text-transform: uppercase;
+  }
+  .scroll-line {
+    width: 1px; height: 50px;
+    background: linear-gradient(to bottom, var(--red), transparent);
+    animation: scrollPulse 2s ease-in-out infinite;
+  }
+  @keyframes scrollPulse {
+    0%, 100% { opacity: 0.3; transform: scaleY(1); }
+    50% { opacity: 1; transform: scaleY(1.2); }
+  }
+
+  /* ── SECTION BASE ── */
+  section { padding: 8rem 3rem; position: relative; }
+  .section-label {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.4em;
+    color: var(--red);
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+  }
+  .section-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(3rem, 6vw, 6rem);
+    letter-spacing: 0.03em;
+    line-height: 0.9;
+    color: var(--white);
+  }
+
+  /* ── ABOUT ── */
+  #about {
+    background: var(--dark2);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6rem;
+    align-items: center;
+  }
+
+  .about-left .about-portrait-frame {
+    position: relative;
+    aspect-ratio: 3/4;
+    background: var(--dark3);
+    overflow: hidden;
+  }
+  .about-portrait-frame::before {
+    content: '';
+    position: absolute;
+    top: -2px; left: -2px; right: -2px; bottom: -2px;
+    border: 2px solid var(--red);
+    z-index: 2;
+    clip-path: polygon(0 0, 85% 0, 100% 15%, 100% 100%, 15% 100%, 0 85%);
+  }
+  .portrait-img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    object-position: top center;
+    filter: grayscale(20%) contrast(1.05);
+    transition: filter 0.5s, transform 0.5s;
+  }
+  .about-portrait-frame:hover .portrait-img {
+    filter: grayscale(0%) contrast(1.1);
+    transform: scale(1.03);
+  }
+
+  /* Placeholder for portrait */
+  .portrait-placeholder {
+    width: 100%; height: 100%;
+    background: linear-gradient(135deg, #1a1a1a 0%, #2a1010 50%, #0f0f0f 100%);
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    gap: 1rem;
+  }
+  .portrait-placeholder svg { opacity: 0.15; }
+  .portrait-placeholder p {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.2em;
+    color: var(--gray);
+    text-align: center;
+  }
+
+  .about-corner-tag {
+    position: absolute;
+    bottom: 0; right: 0;
+    background: var(--red);
+    padding: 0.5rem 1rem;
+    font-family: 'Space Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.15em;
+    color: var(--white);
+    text-transform: uppercase;
+    z-index: 3;
+  }
+
+  .about-right {}
+  .about-bio {
+    font-size: 1.15rem;
+    line-height: 1.8;
+    color: var(--text-body);
+    font-weight: 300;
+    margin-top: 2rem;
+  }
+  .about-bio strong { color: var(--white); font-weight: 600; }
+  .about-bio em { color: var(--gold); font-style: italic; }
+
+  .about-details {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-top: 2.5rem;
+  }
+  .about-detail {
+    border-left: 2px solid rgba(200,16,46,0.4);
+    padding-left: 1rem;
+  }
+  .about-detail-label {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.55rem;
+    letter-spacing: 0.2em;
+    color: var(--gray);
+    text-transform: uppercase;
+    margin-bottom: 0.25rem;
+  }
+  .about-detail-value {
+    font-size: 1rem;
+    color: var(--white);
+    font-weight: 400;
+  }
+
+  /* ── PALMARÈS ── */
+  #palmares {
+    background: var(--dark);
+    position: relative;
+    overflow: hidden;
+  }
+  #palmares::before {
+    content: 'PALMARÈS';
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 20vw;
+    color: rgba(255,255,255,0.015);
+    white-space: nowrap;
+    pointer-events: none;
+  }
+
+  .palmares-header { text-align: center; margin-bottom: 5rem; }
+
+  .medals-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    margin-bottom: 5rem;
+  }
+  .medal-card {
+    position: relative;
+    padding: 2.5rem 2rem;
+    border: 1px solid rgba(255,255,255,0.06);
+    background: rgba(255,255,255,0.02);
+    overflow: hidden;
+    transition: border-color 0.4s, transform 0.4s;
+  }
+  .medal-card:hover {
+    border-color: rgba(255,255,255,0.15);
+    transform: translateY(-4px);
+  }
+  .medal-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+  }
+  .medal-gold::before { background: linear-gradient(90deg, var(--gold), var(--gold-light)); }
+  .medal-silver::before { background: linear-gradient(90deg, #A8A9AD, #D5D6D8); }
+  .medal-bronze::before { background: linear-gradient(90deg, #CD7F32, #E8A050); }
+
+  .medal-icon {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    display: block;
+  }
+  .medal-event {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.2em;
+    color: var(--gray);
+    text-transform: uppercase;
+    margin-bottom: 0.5rem;
+  }
+  .medal-name {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.4rem;
+    color: var(--white);
+    letter-spacing: 0.05em;
+    line-height: 1.1;
+    margin-bottom: 0.25rem;
+  }
+  .medal-year {
+    font-size: 0.9rem;
+    color: var(--gray);
+    font-style: italic;
+  }
+
+  /* Timeline */
+  .timeline-wrap { max-width: 800px; margin: 0 auto; }
+  .timeline-title {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.3em;
+    color: var(--red);
+    text-transform: uppercase;
+    text-align: center;
+    margin-bottom: 3rem;
+  }
+  .timeline {
+    position: relative;
+    padding-left: 2rem;
+  }
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 1px;
+    background: linear-gradient(to bottom, var(--red), transparent);
+  }
+  .timeline-item {
+    position: relative;
+    padding: 0 0 2.5rem 2.5rem;
+  }
+  .timeline-item::before {
+    content: '';
+    position: absolute;
+    left: -4.5px; top: 6px;
+    width: 10px; height: 10px;
+    border-radius: 50%;
+    background: var(--red);
+  }
+  .timeline-item.major::before {
+    background: var(--gold);
+    width: 14px; height: 14px;
+    left: -6.5px;
+  }
+  .t-year {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.2em;
+    color: var(--gold);
+    margin-bottom: 0.3rem;
+  }
+  .t-event {
+    font-size: 1.1rem;
+    color: var(--white);
+    font-weight: 400;
+    margin-bottom: 0.2rem;
+  }
+  .t-detail {
+    font-size: 0.9rem;
+    color: var(--text-body);
+    font-style: italic;
+  }
+
+  /* ── STATS ── */
+  #stats {
+    background: var(--red-dark);
+    background-image:
+      radial-gradient(ellipse at 0% 0%, rgba(212,175,55,0.15) 0%, transparent 60%),
+      radial-gradient(ellipse at 100% 100%, rgba(0,0,0,0.5) 0%, transparent 60%);
+  }
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0;
+    margin-top: 4rem;
+    border: 1px solid rgba(255,255,255,0.1);
+  }
+  .stat-item {
+    padding: 3rem 2rem;
+    text-align: center;
+    border-right: 1px solid rgba(255,255,255,0.1);
+    position: relative;
+    transition: background 0.3s;
+  }
+  .stat-item:last-child { border-right: none; }
+  .stat-item:hover { background: rgba(255,255,255,0.05); }
+  .stat-number {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(3rem, 5vw, 5rem);
+    color: var(--white);
+    line-height: 1;
+    display: block;
+  }
+  .stat-number .stat-unit {
+    font-size: 0.5em;
+    color: var(--gold-light);
+  }
+  .stat-label {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.2em;
+    color: rgba(255,255,255,0.6);
+    text-transform: uppercase;
+    margin-top: 0.5rem;
+  }
+
+  /* ── VIDEOS ── */
+  #videos {
+    background: var(--dark2);
+  }
+  .videos-intro {
+    font-size: 1.15rem;
+    color: var(--text-body);
+    font-style: italic;
+    margin-top: 1.5rem;
+    max-width: 600px;
+  }
+  .videos-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+    margin-top: 3rem;
+  }
+  .video-card {
+    position: relative;
+    background: var(--dark3);
+    border: 1px solid rgba(255,255,255,0.06);
+    overflow: hidden;
+    transition: border-color 0.3s, transform 0.3s;
+    cursor: pointer;
+  }
+  .video-card:hover {
+    border-color: var(--red);
+    transform: scale(1.02);
+  }
+  .video-thumb {
+    position: relative;
+    aspect-ratio: 16/9;
+    overflow: hidden;
+  }
+  .video-thumb iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+    display: block;
+  }
+  .video-info {
+    padding: 1.2rem 1.5rem;
+  }
+  .video-tag {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.55rem;
+    letter-spacing: 0.2em;
+    color: var(--red);
+    text-transform: uppercase;
+    margin-bottom: 0.4rem;
+  }
+  .video-title {
+    font-size: 1rem;
+    color: var(--white);
+    font-weight: 400;
+  }
+
+  /* ── OLYMPICS ── */
+  #olympics {
+    background: var(--dark);
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .olympics-rings-bg {
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    width: 600px; height: 600px;
+    border: 1px solid rgba(255,255,255,0.03);
+    border-radius: 50%;
+  }
+  .olympics-rings-bg-2 {
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    width: 400px; height: 400px;
+    border: 1px solid rgba(200,16,46,0.08);
+    border-radius: 50%;
+  }
+  .olympics-content { position: relative; z-index: 2; max-width: 700px; margin: 0 auto; }
+  .olympics-flag {
+    font-size: 5rem;
+    margin-bottom: 1rem;
+    display: block;
+  }
+  .olympics-year {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(5rem, 15vw, 14rem);
+    color: transparent;
+    -webkit-text-stroke: 1px rgba(255,255,255,0.15);
+    line-height: 0.85;
+    display: block;
+  }
+  .olympics-sub {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.4em;
+    color: var(--red);
+    text-transform: uppercase;
+    margin-top: 1rem;
+  }
+  .olympics-text {
+    font-size: 1.3rem;
+    color: var(--text-body);
+    line-height: 1.7;
+    font-style: italic;
+    margin-top: 2rem;
+    font-weight: 300;
+  }
+  .olympics-text strong { color: var(--gold); font-style: normal; }
+
+  .countdown-wrap {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    margin-top: 3rem;
+  }
+  .countdown-item {
+    text-align: center;
+    padding: 1.5rem 2rem;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.08);
+    min-width: 100px;
+  }
+  .countdown-num {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 3rem;
+    color: var(--gold);
+    display: block;
+    line-height: 1;
+  }
+  .countdown-lbl {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.5rem;
+    letter-spacing: 0.2em;
+    color: var(--gray);
+    text-transform: uppercase;
+    margin-top: 0.4rem;
+  }
+
+  /* ── QUOTE ── */
+  #quote {
+    background: linear-gradient(135deg, var(--dark2), var(--dark3));
+    text-align: center;
+    padding: 6rem 3rem;
+    position: relative;
+    overflow: hidden;
+  }
+  #quote::before {
+    content: '"';
+    position: absolute;
+    top: -5rem; left: 50%;
+    transform: translateX(-50%);
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 25rem;
+    color: rgba(200,16,46,0.06);
+    line-height: 1;
+    pointer-events: none;
+  }
+  .quote-text {
+    position: relative;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1.5rem, 3vw, 2.5rem);
+    font-style: italic;
+    font-weight: 300;
+    color: var(--white);
+    line-height: 1.5;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+  .quote-attr {
+    margin-top: 1.5rem;
+    font-family: 'Space Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.3em;
+    color: var(--gold);
+    text-transform: uppercase;
+  }
+  .quote-attr span { color: var(--gray); }
+
+  /* ── COACH ── */
+  #coach {
+    background: var(--dark2);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+  }
+  .coach-img-wrap {
+    position: relative;
+  }
+  .coach-img-inner {
+    background: var(--dark3);
+    height: 400px;
+    display: flex; align-items: center; justify-content: center;
+    overflow: hidden;
+    border: 1px solid rgba(255,255,255,0.06);
+  }
+  .coach-label-tag {
+    position: absolute;
+    top: 1.5rem; left: 1.5rem;
+    background: var(--gold);
+    color: var(--dark);
+    font-family: 'Space Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    padding: 0.4rem 0.8rem;
+  }
+  .coach-text {
+    font-size: 1.1rem;
+    color: var(--text-body);
+    line-height: 1.8;
+    font-weight: 300;
+    margin-top: 1.5rem;
+  }
+  .coach-name-big {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 2.5rem;
+    color: var(--white);
+    letter-spacing: 0.05em;
+    margin-top: 0.5rem;
+  }
+  .coach-name-big span { color: var(--gold); }
+
+  /* ── LINKS ── */
+  #links {
+    background: var(--dark);
+    text-align: center;
+  }
+  .links-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    margin-top: 3rem;
+    max-width: 900px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .link-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2.5rem 1.5rem;
+    border: 1px solid rgba(255,255,255,0.06);
+    background: rgba(255,255,255,0.02);
+    text-decoration: none;
+    transition: border-color 0.3s, background 0.3s, transform 0.3s;
+    position: relative;
+    overflow: hidden;
+  }
+  .link-card::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--red), transparent);
+    transform: scaleX(0);
+    transition: transform 0.4s;
+  }
+  .link-card:hover::after { transform: scaleX(1); }
+  .link-card:hover {
+    border-color: rgba(200,16,46,0.3);
+    background: rgba(200,16,46,0.05);
+    transform: translateY(-4px);
+  }
+  .link-icon { font-size: 2rem; margin-bottom: 1rem; }
+  .link-name {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.3rem;
+    color: var(--white);
+    letter-spacing: 0.05em;
+    margin-bottom: 0.4rem;
+  }
+  .link-desc {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.55rem;
+    letter-spacing: 0.15em;
+    color: var(--gray);
+    text-align: center;
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--dark2);
+    padding: 3rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid rgba(255,255,255,0.05);
+  }
+  .footer-logo {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.5rem;
+    letter-spacing: 0.1em;
+    color: var(--white);
+  }
+  .footer-logo span { color: var(--red); }
+  .footer-credits {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.55rem;
+    letter-spacing: 0.15em;
+    color: var(--gray);
+    text-align: right;
+    line-height: 1.8;
+  }
+  .footer-credits a { color: var(--gold); text-decoration: none; }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+  }
+
+  .reveal {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.9s ease, transform 0.9s ease;
+  }
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ── SPONSORSHIP BANNER ── */
+  .sponsor-banner {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 200;
+    background: linear-gradient(90deg, var(--gold-light) 0%, var(--gold) 40%, #B8960C 100%);
+    color: var(--dark);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1.5rem;
+    padding: 0.65rem 2rem;
+    font-family: 'Space Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    animation: bannerSlideDown 0.6s 0.2s both;
+    box-shadow: 0 2px 20px rgba(212,175,55,0.4);
+  }
+  @keyframes bannerSlideDown {
+    from { transform: translateY(-100%); }
+    to   { transform: translateY(0); }
+  }
+  .sponsor-banner-text { font-weight: 700; }
+  .sponsor-banner-divider {
+    width: 1px; height: 16px;
+    background: rgba(0,0,0,0.25);
+  }
+  .sponsor-banner-cta {
+    background: var(--dark);
+    color: var(--gold);
+    padding: 0.35rem 1rem;
+    font-size: 0.6rem;
+    letter-spacing: 0.15em;
+    text-decoration: none;
+    font-weight: 700;
+    transition: background 0.2s, color 0.2s;
+    white-space: nowrap;
+    border: 1px solid var(--dark);
+  }
+  .sponsor-banner-cta:hover {
+    background: transparent;
+    color: var(--dark);
+    border-color: var(--dark);
+  }
+  .sponsor-banner-close {
+    position: absolute;
+    right: 1rem;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: rgba(0,0,0,0.5);
+    font-size: 1.1rem;
+    line-height: 1;
+    padding: 0.2rem;
+    transition: color 0.2s;
+  }
+  .sponsor-banner-close:hover { color: var(--dark); }
+
+  /* shift content down by banner height */
+  body.banner-visible nav { top: 36px; }
+  body.banner-visible #hero { padding-top: 36px; }
+
+  /* ── SPONSORSHIP SECTION ── */
+  #sponsorship {
+    background: linear-gradient(135deg, #0e0e0e 0%, #161008 60%, #0e0e0e 100%);
+    position: relative;
+    overflow: hidden;
+  }
+  #sponsorship::before {
+    content: '';
+    position: absolute; inset: 0;
+    background-image:
+      linear-gradient(rgba(212,175,55,0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(212,175,55,0.04) 1px, transparent 1px);
+    background-size: 50px 50px;
+  }
+  .sponsorship-inner { position: relative; z-index: 1; }
+  .sponsorship-header { margin-bottom: 4rem; }
+  .sponsorship-header .section-title { color: var(--gold); }
+
+  .sponsorship-pitch {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: start;
+    margin-bottom: 5rem;
+  }
+  .pitch-text {
+    font-size: 1.15rem;
+    color: var(--text-body);
+    line-height: 1.9;
+    font-weight: 300;
+  }
+  .pitch-text strong { color: var(--white); }
+  .pitch-text em { color: var(--gold); font-style: italic; }
+
+  .pitch-values {
+    display: flex; flex-direction: column; gap: 1.2rem;
+  }
+  .pitch-value-item {
+    display: flex; align-items: flex-start; gap: 1rem;
+    padding: 1.2rem 1.5rem;
+    border: 1px solid rgba(212,175,55,0.15);
+    background: rgba(212,175,55,0.04);
+    transition: border-color 0.3s, background 0.3s;
+  }
+  .pitch-value-item:hover {
+    border-color: rgba(212,175,55,0.4);
+    background: rgba(212,175,55,0.08);
+  }
+  .pitch-value-icon { font-size: 1.4rem; flex-shrink: 0; }
+  .pitch-value-text {}
+  .pitch-value-title {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.2em;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 0.25rem;
+  }
+  .pitch-value-desc {
+    font-size: 0.95rem;
+    color: var(--text-body);
+    line-height: 1.5;
+  }
+
+  /* Partnership tiers */
+  .tiers-title {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.35em;
+    color: var(--gold);
+    text-transform: uppercase;
+    text-align: center;
+    margin-bottom: 2.5rem;
+  }
+  .tiers-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    margin-bottom: 4rem;
+  }
+  .tier-card {
+    position: relative;
+    padding: 2.5rem 2rem 3rem;
+    border: 1px solid;
+    display: flex; flex-direction: column; gap: 1.2rem;
+    transition: transform 0.3s;
+    overflow: hidden;
+  }
+  .tier-card:hover { transform: translateY(-6px); }
+  .tier-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    opacity: 0.05;
+  }
+  .tier-bronze { border-color: rgba(205,127,50,0.4); }
+  .tier-bronze::before { background: #CD7F32; }
+  .tier-silver { border-color: rgba(168,169,173,0.4); }
+  .tier-silver::before { background: #A8A9AD; }
+  .tier-gold   { border-color: rgba(212,175,55,0.6); }
+  .tier-gold::before { background: #D4AF37; }
+  .tier-gold { box-shadow: 0 0 40px rgba(212,175,55,0.1); }
+
+  .tier-medal {
+    font-size: 2.5rem;
+  }
+  .tier-name {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 2rem;
+    letter-spacing: 0.08em;
+  }
+  .tier-bronze .tier-name { color: #CD7F32; }
+  .tier-silver .tier-name { color: #C8C9CD; }
+  .tier-gold   .tier-name { color: var(--gold); }
+
+  .tier-features { list-style: none; display: flex; flex-direction: column; gap: 0.7rem; }
+  .tier-features li {
+    display: flex; align-items: flex-start; gap: 0.6rem;
+    font-size: 0.95rem;
+    color: var(--text-body);
+    line-height: 1.4;
+  }
+  .tier-features li::before {
+    content: '→';
+    flex-shrink: 0;
+    margin-top: 0.05em;
+  }
+  .tier-bronze .tier-features li::before { color: #CD7F32; }
+  .tier-silver .tier-features li::before { color: #A8A9AD; }
+  .tier-gold   .tier-features li::before { color: var(--gold); }
+
+  .tier-badge {
+    position: absolute;
+    top: 1rem; right: 1rem;
+    font-family: 'Space Mono', monospace;
+    font-size: 0.5rem;
+    letter-spacing: 0.15em;
+    padding: 0.3rem 0.6rem;
+    text-transform: uppercase;
+  }
+  .tier-gold .tier-badge {
+    background: var(--gold);
+    color: var(--dark);
+  }
+
+  /* Contact CTA */
+  .sponsor-cta-block {
+    text-align: center;
+    padding: 4rem 2rem;
+    border: 1px solid rgba(212,175,55,0.2);
+    background: rgba(212,175,55,0.03);
+    position: relative;
+    overflow: hidden;
+  }
+  .sponsor-cta-block::before {
+    content: '★';
+    position: absolute;
+    font-size: 18rem;
+    color: rgba(212,175,55,0.03);
+    top: 50%; left: 50%;
+    transform: translate(-50%,-50%);
+    pointer-events: none;
+  }
+  .sponsor-cta-eyebrow {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.3em;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+  }
+  .sponsor-cta-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    color: var(--white);
+    letter-spacing: 0.04em;
+    margin-bottom: 1rem;
+  }
+  .sponsor-cta-sub {
+    font-size: 1.1rem;
+    color: var(--text-body);
+    font-style: italic;
+    margin-bottom: 2.5rem;
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .sponsor-contact-wrap {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+    position: relative;
+  }
+  .sponsor-contact-btn {
+    display: flex; align-items: center; gap: 0.75rem;
+    padding: 1rem 2rem;
+    text-decoration: none;
+    font-family: 'Space Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .sponsor-contact-btn:hover { transform: translateY(-3px); }
+  .btn-gold {
+    background: var(--gold);
+    color: var(--dark);
+    font-weight: 700;
+    box-shadow: 0 4px 20px rgba(212,175,55,0.3);
+  }
+  .btn-gold:hover { box-shadow: 0 8px 30px rgba(212,175,55,0.5); }
+  .btn-outline {
+    border: 1px solid rgba(212,175,55,0.5);
+    color: var(--gold);
+  }
+  .btn-outline:hover { border-color: var(--gold); background: rgba(212,175,55,0.05); }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 900px) {
+    nav { padding: 1.2rem 1.5rem; }
+    .nav-links { gap: 1.5rem; }
+    #about, #coach { grid-template-columns: 1fr; gap: 3rem; }
+    .medals-grid { grid-template-columns: repeat(2, 1fr); }
+    .stats-grid { grid-template-columns: repeat(2, 1fr); }
+    .videos-grid { grid-template-columns: 1fr; }
+    .links-grid { grid-template-columns: 1fr; }
+    .hero-stats-float { display: none; }
+    section { padding: 5rem 1.5rem; }
+    footer { flex-direction: column; gap: 1.5rem; text-align: center; }
+    .footer-credits { text-align: center; }
+    .sponsorship-pitch { grid-template-columns: 1fr; gap: 2.5rem; }
+    .tiers-grid { grid-template-columns: 1fr; }
+    .sponsor-banner { font-size: 0.55rem; gap: 0.75rem; padding: 0.6rem 2.5rem 0.6rem 1rem; flex-wrap: wrap; }
+  }
+  @media (max-width: 600px) {
+    .medals-grid { grid-template-columns: 1fr; }
+    .stats-grid { grid-template-columns: 1fr 1fr; }
+    .countdown-wrap { gap: 1rem; }
+    .countdown-item { padding: 1rem; min-width: 70px; }
+    .sponsor-contact-wrap { flex-direction: column; align-items: center; }
+  }
+</style>
+</head>
+<body>
+
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<!-- SPONSORSHIP BANNER -->
+<div class="sponsor-banner" id="sponsorBanner">
+  <span class="sponsor-banner-text">🤝 Opportunité de partenariat</span>
+  <div class="sponsor-banner-divider"></div>
+  <span>Associez votre marque à un Olympien canadien</span>
+  <div class="sponsor-banner-divider"></div>
+  <a href="#sponsorship" class="sponsor-banner-cta">Découvrir →</a>
+  <button class="sponsor-banner-close" id="closeBanner" aria-label="Fermer">✕</button>
+</div>
+
+<!-- NAV -->
+<nav>
+  <a href="#hero" class="nav-logo">FGD<span>.</span></a>
+  <ul class="nav-links">
+    <li><a href="#about">Biographie</a></li>
+    <li><a href="#palmares">Palmarès</a></li>
+    <li><a href="#stats">Statistiques</a></li>
+    <li><a href="#videos">Vidéos</a></li>
+    <li><a href="#olympics">Los Angeles 2028</a></li>
+    <li><a href="#sponsorship" style="color:var(--gold);">Partenariat</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div class="tatami-grid"></div>
+  <div class="hero-slash"></div>
+  <div class="hero-slash-2"></div>
+  <div class="hero-bg-text">JUDO</div>
+
+  <div class="hero-content">
+    <p class="hero-eyebrow">🇨🇦 Judoka Canadien · -81 kg · Alma, Québec</p>
+    <h1 class="hero-name">
+      François<br>
+      <span class="red">Gauthier</span><br>
+      Drapeau
+    </h1>
+    <div class="hero-weight">Catégorie –81 kg</div>
+    <p class="hero-tagline">L'élite du judo canadien. Olympien. Double champion Grand Slam 2025.</p>
+  </div>
+
+  <div class="hero-stats-float">
+    <div class="hero-stat-pill">
+      <span class="hsp-num">11</span>
+      <span class="hsp-label">Médailles<br>Grand Slam</span>
+    </div>
+    <div class="hero-stat-pill">
+      <span class="hsp-num">2</span>
+      <span class="hsp-label">Ors<br>Grand Slam</span>
+    </div>
+    <div class="hero-stat-pill">
+      <span class="hsp-num">27</span>
+      <span class="hsp-label">Ans</span>
+    </div>
+  </div>
+
+  <div class="scroll-indicator">
+    <span>Défiler</span>
+    <div class="scroll-line"></div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="about-left">
+    <div class="about-portrait-frame">
+      <!-- We use a real photo via the Wikimedia/Team Canada source -->
+      <img
+        class="portrait-img"
+        src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d6/Fran%C3%A7ois_Gauthier-Drapeau_2024_Olympics.jpg/800px-Fran%C3%A7ois_Gauthier-Drapeau_2024_Olympics.jpg"
+        alt="François Gauthier-Drapeau"
+        onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
+      >
+      <div class="portrait-placeholder" style="display:none;">
+        <svg width="80" height="80" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="40" cy="28" r="16" stroke="white" stroke-width="2"/>
+          <path d="M8 72c0-17.673 14.327-32 32-32s32 14.327 32 32" stroke="white" stroke-width="2"/>
+        </svg>
+        <p>Photo: IJF / Judo Canada</p>
+      </div>
+      <div class="about-corner-tag">Olympien Paris 2024</div>
+    </div>
+  </div>
+  <div class="about-right">
+    <p class="section-label reveal">Biographie</p>
+    <h2 class="section-title reveal">L'homme<br>du tatami</h2>
+    <div class="about-bio reveal">
+      <p>Né le <strong>27 janvier 1998</strong> à <strong>Alma, Québec</strong>, François Gauthier-Drapeau est l'un des judokas les plus prometteurs de la planète. Évoluant dans la catégorie des <em>moins de 81 kg</em>, il incarne la nouvelle génération du judo canadien.</p>
+      <br>
+      <p>Son parcours n'a pas été sans embûches — une <strong>blessure au genou en 2018</strong> puis la pandémie de COVID-19 l'ont éloigné des tatamis. Mais François est revenu plus fort que jamais, gravissant les échelons du circuit mondial avec une régularité et une détermination exemplaires.</p>
+      <br>
+      <p>En 2021, il réintègre le circuit international et décroche rapidement sa première médaille en Grand Slam à <strong>Bakou</strong>. Depuis, il n'a cessé d'évoluer, culminant en 2025 avec <em>deux titres en Grand Slam</em> — à Paris et à Abu Dhabi — s'imposant comme une force incontournable du judo mondial.</p>
+      <br>
+      <p>Titulaire d'un <strong>baccalauréat en génie</strong>, il est l'exemple parfait de l'athlète complet : brillant sur le tatami, rigoureux dans la vie.</p>
+    </div>
+    <div class="about-details reveal">
+      <div class="about-detail">
+        <div class="about-detail-label">Date de naissance</div>
+        <div class="about-detail-value">27 janvier 1998</div>
+      </div>
+      <div class="about-detail">
+        <div class="about-detail-label">Lieu de naissance</div>
+        <div class="about-detail-value">Alma, Québec</div>
+      </div>
+      <div class="about-detail">
+        <div class="about-detail-label">Catégorie</div>
+        <div class="about-detail-value">–81 kg (anciennement –73 kg)</div>
+      </div>
+      <div class="about-detail">
+        <div class="about-detail-label">Taille</div>
+        <div class="about-detail-value">185 cm</div>
+      </div>
+      <div class="about-detail">
+        <div class="about-detail-label">Entraîneur</div>
+        <div class="about-detail-value">Antoine Valois-Fortier</div>
+      </div>
+      <div class="about-detail">
+        <div class="about-detail-label">Formation</div>
+        <div class="about-detail-value">Baccalauréat en génie</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PALMARES -->
+<section id="palmares">
+  <div class="palmares-header reveal">
+    <p class="section-label">Palmarès</p>
+    <h2 class="section-title">Médailles &<br>Victoires</h2>
+  </div>
+
+  <div class="medals-grid">
+    <!-- GOLD -->
+    <div class="medal-card medal-gold reveal">
+      <span class="medal-icon">🥇</span>
+      <div class="medal-event">Grand Slam</div>
+      <div class="medal-name">Grand Slam Paris</div>
+      <div class="medal-year">2025 · –81 kg</div>
+    </div>
+    <div class="medal-card medal-gold reveal">
+      <span class="medal-icon">🥇</span>
+      <div class="medal-event">Grand Slam</div>
+      <div class="medal-name">Grand Slam Abu Dhabi</div>
+      <div class="medal-year">2025 · –81 kg</div>
+    </div>
+    <div class="medal-card medal-gold reveal">
+      <span class="medal-icon">🥇</span>
+      <div class="medal-event">Championnats panaméricains</div>
+      <div class="medal-name">Pan Am Championships</div>
+      <div class="medal-year">2023 · –81 kg</div>
+    </div>
+    <div class="medal-card medal-gold reveal">
+      <span class="medal-icon">🥇</span>
+      <div class="medal-event">Open panaméricain</div>
+      <div class="medal-name">Pan American Open Montréal</div>
+      <div class="medal-year">2025 · –90 kg</div>
+    </div>
+
+    <!-- SILVER -->
+    <div class="medal-card medal-silver reveal">
+      <span class="medal-icon">🥈</span>
+      <div class="medal-event">Grand Slam</div>
+      <div class="medal-name">Grand Slam Antalya</div>
+      <div class="medal-year">2024 · Finale vs Nagase (JPN)</div>
+    </div>
+    <div class="medal-card medal-silver reveal">
+      <span class="medal-icon">🥈</span>
+      <div class="medal-event">Grand Slam</div>
+      <div class="medal-name">Grand Slam Bakou</div>
+      <div class="medal-year">2025 · –81 kg</div>
+    </div>
+    <div class="medal-card medal-silver reveal">
+      <span class="medal-icon">🥈</span>
+      <div class="medal-event">Jeux du Commonwealth</div>
+      <div class="medal-name">Commonwealth Games</div>
+      <div class="medal-year">2022 · Birmingham</div>
+    </div>
+    <div class="medal-card medal-silver reveal">
+      <span class="medal-icon">🥈</span>
+      <div class="medal-event">Championnats panaméricains</div>
+      <div class="medal-name">Pan Am Championships</div>
+      <div class="medal-year">2024 · –81 kg</div>
+    </div>
+
+    <!-- BRONZE -->
+    <div class="medal-card medal-bronze reveal">
+      <span class="medal-icon">🥉</span>
+      <div class="medal-event">Grand Slam</div>
+      <div class="medal-name">Grand Slam Bakou</div>
+      <div class="medal-year">2021 · Première médaille GS</div>
+    </div>
+    <div class="medal-card medal-bronze reveal">
+      <span class="medal-icon">🥉</span>
+      <div class="medal-event">Grand Slam</div>
+      <div class="medal-name">Grand Slam Tel Aviv</div>
+      <div class="medal-year">2022 & 2023 · ×2 bronzes</div>
+    </div>
+    <div class="medal-card medal-bronze reveal">
+      <span class="medal-icon">🥉</span>
+      <div class="medal-event">Grand Slam</div>
+      <div class="medal-name">Grand Slam Paris</div>
+      <div class="medal-year">2023 & 2024 · ×2 bronzes</div>
+    </div>
+    <div class="medal-card medal-bronze reveal">
+      <span class="medal-icon">🥉</span>
+      <div class="medal-event">Grand Slam</div>
+      <div class="medal-name">Grand Slam Tokyo</div>
+      <div class="medal-year">2024 · –81 kg</div>
+    </div>
+  </div>
+
+  <!-- TIMELINE -->
+  <div class="timeline-wrap reveal">
+    <div class="timeline-title">Chronologie de carrière</div>
+    <div class="timeline">
+      <div class="timeline-item">
+        <div class="t-year">2016</div>
+        <div class="t-event">Premiers pas sur la scène internationale</div>
+        <div class="t-detail">Bronze aux Pan Am Juniors (Buenos Aires) · –73 kg</div>
+      </div>
+      <div class="timeline-item">
+        <div class="t-year">2018</div>
+        <div class="t-event">Blessure au genou</div>
+        <div class="t-detail">Interruption de carrière — retour en force à venir</div>
+      </div>
+      <div class="timeline-item">
+        <div class="t-year">2021</div>
+        <div class="t-event">Retour sur le circuit international</div>
+        <div class="t-detail">Première médaille Grand Slam à Bakou 🥉</div>
+      </div>
+      <div class="timeline-item">
+        <div class="t-year">2022</div>
+        <div class="t-event">Première saison complète en –81 kg</div>
+        <div class="t-detail">Bronze Tel Aviv · Argent Commonwealth Games Birmingham</div>
+      </div>
+      <div class="timeline-item">
+        <div class="t-year">2023</div>
+        <div class="t-event">Consécration panaméricaine</div>
+        <div class="t-detail">Champion panaméricain 🥇 · 5e aux Mondiaux de Doha</div>
+      </div>
+      <div class="timeline-item">
+        <div class="t-year">2024</div>
+        <div class="t-event">Première finale Grand Slam & Jeux Olympiques</div>
+        <div class="t-detail">Argent Antalya · Olympien à Paris · Bronze Tokyo</div>
+      </div>
+      <div class="timeline-item major">
+        <div class="t-year">2025</div>
+        <div class="t-event">Année de tous les records 🏆</div>
+        <div class="t-detail">Champion Grand Slam Paris · Champion Grand Slam Abu Dhabi · 11e médaille Grand Slam</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<section id="stats">
+  <div style="text-align:center;" class="reveal">
+    <p class="section-label">Statistiques</p>
+    <h2 class="section-title">Les chiffres<br>parlent</h2>
+  </div>
+  <div class="stats-grid reveal">
+    <div class="stat-item">
+      <span class="stat-number">11</span>
+      <div class="stat-label">Médailles Grand Slam</div>
+    </div>
+    <div class="stat-item">
+      <span class="stat-number">2<span class="stat-unit">×🥇</span></span>
+      <div class="stat-label">Titres Grand Slam 2025</div>
+    </div>
+    <div class="stat-item">
+      <span class="stat-number">81<span class="stat-unit">kg</span></span>
+      <div class="stat-label">Catégorie de compétition</div>
+    </div>
+    <div class="stat-item">
+      <span class="stat-number">185<span class="stat-unit">cm</span></span>
+      <div class="stat-label">Taille</div>
+    </div>
+  </div>
+</section>
+
+<!-- QUOTE -->
+<section id="quote">
+  <blockquote>
+    <p class="quote-text">"Dans la finale, j'ai vraiment fait du bon judo. Mes techniques ont bien fonctionné et j'ai accumulé des points rapidement."</p>
+    <cite class="quote-attr">— François Gauthier-Drapeau <span>· Grand Slam Abu Dhabi, novembre 2025</span></cite>
+  </blockquote>
+</section>
+
+<!-- VIDEOS -->
+<section id="videos">
+  <p class="section-label reveal">Vidéos</p>
+  <h2 class="section-title reveal">En action<br>sur le tatami</h2>
+  <p class="videos-intro reveal">Revivez les meilleurs moments de François Gauthier-Drapeau lors des compétitions internationales.</p>
+
+  <div class="videos-grid reveal">
+    <div class="video-card">
+      <div class="video-thumb">
+        <iframe
+          src="https://www.youtube.com/embed/8r2IM09-bj4"
+          title="François Gauthier-Drapeau - Grand Slam Paris 2025"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen
+          loading="lazy">
+        </iframe>
+      </div>
+      <div class="video-info">
+        <div class="video-tag">Grand Slam · Paris 2025</div>
+        <div class="video-title">François Gauthier-Drapeau — Champion à Paris 🥇</div>
+      </div>
+    </div>
+
+    <div class="video-card">
+      <div class="video-thumb">
+        <iframe
+          src="https://www.youtube.com/embed/2RBNRnBmGb0"
+          title="François Gauthier-Drapeau - Paris Olympics 2024"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen
+          loading="lazy">
+        </iframe>
+      </div>
+      <div class="video-info">
+        <div class="video-tag">Jeux Olympiques · Paris 2024</div>
+        <div class="video-title">François Gauthier-Drapeau aux Jeux de Paris</div>
+      </div>
+    </div>
+
+    <div class="video-card">
+      <div class="video-thumb">
+        <iframe
+          src="https://www.youtube.com/embed/Y7M_bqbFHKA"
+          title="François Gauthier-Drapeau - Antalya Grand Slam 2024 Silver"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen
+          loading="lazy">
+        </iframe>
+      </div>
+      <div class="video-info">
+        <div class="video-tag">Grand Slam · Antalya 2024</div>
+        <div class="video-title">Finale face à Nagase — Argent historique 🥈</div>
+      </div>
+    </div>
+
+    <div class="video-card">
+      <div class="video-thumb">
+        <iframe
+          src="https://www.youtube.com/embed/search?q=Gauthier+Drapeau+judo+highlights"
+          title="Gauthier-Drapeau Judo Highlights"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen
+          loading="lazy">
+        </iframe>
+      </div>
+      <div class="video-info">
+        <div class="video-tag">Highlights · IJF World Tour</div>
+        <div class="video-title">Les meilleurs ippons de François Gauthier-Drapeau</div>
+      </div>
+    </div>
+  </div>
+
+  <div style="text-align:center; margin-top: 2.5rem;" class="reveal">
+    <a href="https://www.youtube.com/results?search_query=Gauthier+Drapeau+judo" target="_blank" rel="noopener"
+       style="display:inline-block; padding:1rem 2.5rem; border:1px solid var(--red); color:var(--red); font-family:'Space Mono',monospace; font-size:0.65rem; letter-spacing:0.2em; text-transform:uppercase; text-decoration:none; transition: background 0.3s, color 0.3s;"
+       onmouseover="this.style.background='var(--red)'; this.style.color='white';"
+       onmouseout="this.style.background='transparent'; this.style.color='var(--red)';">
+      Voir plus sur YouTube →
+    </a>
+  </div>
+</section>
+
+<!-- COACH -->
+<section id="coach">
+  <div class="coach-img-wrap reveal">
+    <div class="coach-img-inner">
+      <div style="text-align:center; padding: 2rem;">
+        <div style="font-size:5rem;">🥋</div>
+        <p style="font-family:'Bebas Neue',sans-serif; font-size:1.5rem; color:var(--white); margin-top:1rem;">Duo Valois-Fortier / Gauthier-Drapeau</p>
+        <p style="font-family:'Space Mono',monospace; font-size:0.6rem; letter-spacing:0.15em; color:var(--gray); margin-top:0.5rem;">Maître & Champion</p>
+      </div>
+    </div>
+    <div class="coach-label-tag">Entraîneur national</div>
+  </div>
+  <div class="reveal">
+    <p class="section-label">L'homme derrière le champion</p>
+    <div class="coach-name-big">Antoine <span>Valois-Fortier</span></div>
+    <p class="coach-text">
+      Il y a une belle symbiose dans ce duo. <strong style="color:var(--white);">Antoine Valois-Fortier</strong>, médaillé de bronze aux Jeux olympiques de Londres 2012 dans la même catégorie des –81 kg, est aujourd'hui l'entraîneur de François.
+    </p>
+    <p class="coach-text">
+      Celui qui était autrefois le joyau du judo canadien transmet maintenant son savoir à son successeur désigné. Une continuité rare et précieuse qui permet à François de bénéficier d'une expertise de premier plan, forgée par l'expérience olympique.
+    </p>
+    <p class="coach-text" style="margin-top:1rem;">
+      <em style="color:var(--gold);">"Je n'ai aucun doute que lorsque l'enjeu sera plus élevé, François va gagner ce combat."</em>
+      <br><span style="font-family:'Space Mono',monospace; font-size:0.6rem; color:var(--gray);">— Antoine Valois-Fortier, après la finale d'Antalya 2024</span>
+    </p>
+  </div>
+</section>
+
+<!-- OLYMPICS 2028 -->
+<section id="olympics">
+  <div class="olympics-rings-bg"></div>
+  <div class="olympics-rings-bg-2"></div>
+  <div class="olympics-content">
+    <span class="olympics-flag">🌟</span>
+    <span class="olympics-year">2028</span>
+    <p class="olympics-sub">Los Angeles · Jeux Olympiques d'été</p>
+    <p class="olympics-text">
+      Après avoir représenté fièrement le Canada aux <strong>Jeux de Paris 2024</strong>, François Gauthier-Drapeau a maintenant les yeux rivés sur Los Angeles. À seulement 27 ans, avec deux titres Grand Slam en 2025 et une progression fulgurante, il entrera dans le cycle olympique en position de <strong>favori canadien</strong>.
+    </p>
+
+    <!-- Countdown to LA 2028 Olympics (July 14, 2028) -->
+    <div class="countdown-wrap" id="countdown">
+      <div class="countdown-item">
+        <span class="countdown-num" id="cd-days">—</span>
+        <div class="countdown-lbl">Jours</div>
+      </div>
+      <div class="countdown-item">
+        <span class="countdown-num" id="cd-hours">—</span>
+        <div class="countdown-lbl">Heures</div>
+      </div>
+      <div class="countdown-item">
+        <span class="countdown-num" id="cd-mins">—</span>
+        <div class="countdown-lbl">Minutes</div>
+      </div>
+      <div class="countdown-item">
+        <span class="countdown-num" id="cd-secs">—</span>
+        <div class="countdown-lbl">Secondes</div>
+      </div>
+    </div>
+    <p style="font-family:'Space Mono',monospace; font-size:0.55rem; letter-spacing:0.2em; color:var(--gray); margin-top:1.5rem;">Jusqu'à l'ouverture des Jeux Olympiques de Los Angeles 2028</p>
+  </div>
+</section>
+
+<!-- LINKS -->
+<section id="links">
+  <p class="section-label reveal">Suivre François</p>
+  <h2 class="section-title reveal">Liens officiels</h2>
+  <div class="links-grid reveal">
+    <a href="https://www.ijf.org/judoka/32154" target="_blank" rel="noopener" class="link-card">
+      <span class="link-icon">🏅</span>
+      <div class="link-name">IJF Profile</div>
+      <div class="link-desc">Résultats officiels · Fédération internationale</div>
+    </a>
+    <a href="https://olympic.ca/team-canada/francois-gauthier-drapeau/" target="_blank" rel="noopener" class="link-card">
+      <span class="link-icon">🇨🇦</span>
+      <div class="link-name">Équipe Canada</div>
+      <div class="link-desc">Profil officiel · Comité olympique canadien</div>
+    </a>
+    <a href="https://judocanada.org" target="_blank" rel="noopener" class="link-card">
+      <span class="link-icon">🥋</span>
+      <div class="link-name">Judo Canada</div>
+      <div class="link-desc">Fédération nationale · Actualités</div>
+    </a>
+  </div>
+</section>
+
+<!-- SPONSORSHIP -->
+<section id="sponsorship">
+  <div class="sponsorship-inner">
+    <div class="sponsorship-header reveal">
+      <p class="section-label" style="color:var(--gold);">Opportunité de partenariat</p>
+      <h2 class="section-title" style="color:var(--gold);">Devenez<br>partenaire</h2>
+    </div>
+
+    <div class="sponsorship-pitch">
+      <div class="reveal">
+        <p class="pitch-text">
+          Je suis un athlète de <strong>28 ans</strong>, originaire du Lac-Saint-Jean, au Québec. Olympien à Paris en 2024, je me prépare maintenant activement pour les Jeux Olympiques de <em>Los Angeles 2028</em>.
+        </p>
+        <br>
+        <p class="pitch-text">
+          Je m'entraîne à temps plein au <strong>Stade olympique de Montréal</strong>. Diplômé en ingénierie, je poursuis aujourd'hui des études en informatique — un profil unique alliant <em>excellence sportive et rigueur intellectuelle</em>.
+        </p>
+        <br>
+        <p class="pitch-text">
+          Mes valeurs : <strong>la discipline</strong> et <strong>la persévérance</strong>. Les sujets qui me tiennent à cœur : le développement technologique, le développement durable et la responsabilité sociale. Un athlète dont l'image s'aligne naturellement avec des marques à <em>fort impact et vision à long terme</em>.
+        </p>
+      </div>
+
+      <div class="pitch-values reveal">
+        <div class="pitch-value-item">
+          <span class="pitch-value-icon">🏆</span>
+          <div class="pitch-value-text">
+            <div class="pitch-value-title">Image d'excellence</div>
+            <div class="pitch-value-desc">Compétitionnant au plus haut niveau mondial, j'incarne l'excellence, la discipline et la constance.</div>
+          </div>
+        </div>
+        <div class="pitch-value-item">
+          <span class="pitch-value-icon">🌍</span>
+          <div class="pitch-value-text">
+            <div class="pitch-value-title">Visibilité internationale</div>
+            <div class="pitch-value-desc">Présence sur la scène mondiale lors d'événements à forte couverture médiatique — Grand Slams IJF, Jeux Olympiques.</div>
+          </div>
+        </div>
+        <div class="pitch-value-item">
+          <span class="pitch-value-icon">📍</span>
+          <div class="pitch-value-text">
+            <div class="pitch-value-title">Visibilité locale</div>
+            <div class="pitch-value-desc">Présence établie et reconnue dans ma communauté du Lac-Saint-Jean et dans les médias locaux québécois.</div>
+          </div>
+        </div>
+        <div class="pitch-value-item">
+          <span class="pitch-value-icon">📱</span>
+          <div class="pitch-value-text">
+            <div class="pitch-value-title">Audience engagée</div>
+            <div class="pitch-value-desc">Une communauté active sur les médias sociaux qui suit mon parcours, mes entraînements et mes compétitions.</div>
+          </div>
+        </div>
+        <div class="pitch-value-item">
+          <span class="pitch-value-icon">🤝</span>
+          <div class="pitch-value-text">
+            <div class="pitch-value-title">Représentation de marque</div>
+            <div class="pitch-value-desc">Intégration de vos partenaires dans des environnements de compétition, d'entraînement et de performance.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TIERS -->
+    <div class="tiers-title reveal">Niveaux de partenariat — tout est adaptable à vos besoins</div>
+    <div class="tiers-grid reveal">
+      <div class="tier-card tier-bronze">
+        <span class="tier-medal">🥉</span>
+        <div class="tier-name">Bronze</div>
+        <ul class="tier-features">
+          <li>Visibilité du logo / de la marque</li>
+          <li>Intégration dans certains contenus</li>
+          <li>Présence sur les médias sociaux</li>
+        </ul>
+      </div>
+
+      <div class="tier-card tier-silver">
+        <span class="tier-medal">🥈</span>
+        <div class="tier-name">Argent</div>
+        <ul class="tier-features">
+          <li>Création de contenu dédié (photos, vidéos)</li>
+          <li>Placements de produits</li>
+          <li>Collaboration sur des campagnes promotionnelles</li>
+        </ul>
+      </div>
+
+      <div class="tier-card tier-gold">
+        <span class="tier-medal">🥇</span>
+        <div class="tier-name">Or</div>
+        <div class="tier-badge">Premium</div>
+        <ul class="tier-features">
+          <li>Participations à des événements corporatifs</li>
+          <li>Conférences</li>
+          <li>Démonstrations / initiations au judo</li>
+        </ul>
+      </div>
+    </div>
+
+    <p class="reveal" style="text-align:center; font-size:0.9rem; color:var(--gray); font-style:italic; margin-bottom: 3.5rem;">
+      Les services ci-dessus sont à titre d'exemple. Tout peut être adapté aux besoins et aux objectifs du partenaire.
+    </p>
+
+    <!-- CTA BLOCK -->
+    <div class="sponsor-cta-block reveal">
+      <p class="sponsor-cta-eyebrow">Créons de la valeur ensemble</p>
+      <h3 class="sponsor-cta-title">Contactez-moi !</h3>
+      <p class="sponsor-cta-sub">Vous avez une idée de collaboration ? Discutons-en — chaque partenariat est unique.</p>
+      <div class="sponsor-contact-wrap">
+        <a href="mailto:frankyboy10@hotmail.ca" class="sponsor-contact-btn btn-gold">
+          ✉ frankyboy10@hotmail.ca
+        </a>
+        <a href="https://www.instagram.com/francoisgauthierd" target="_blank" rel="noopener" class="sponsor-contact-btn btn-outline">
+          📷 @francoisgauthierd
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">FGD<span>.</span></div>
+  <div class="footer-credits">
+    François Gauthier-Drapeau — Judoka Canadien · –81 kg<br>
+    Sources: <a href="https://www.ijf.org/judoka/32154" target="_blank">IJF</a> ·
+    <a href="https://olympic.ca/team-canada/francois-gauthier-drapeau/" target="_blank">Équipe Canada</a> ·
+    <a href="https://judocanada.org" target="_blank">Judo Canada</a> ·
+    <a href="https://en.wikipedia.org/wiki/Fran%C3%A7ois_Gauthier-Drapeau" target="_blank">Wikipedia</a><br>
+    Site non-officiel — Créé à des fins de présentation | 2025
+  </div>
+</footer>
+
+<script>
+  // Sponsorship banner
+  const banner = document.getElementById('sponsorBanner');
+  const closeBtn = document.getElementById('closeBanner');
+  document.body.classList.add('banner-visible');
+  closeBtn.addEventListener('click', () => {
+    banner.style.display = 'none';
+    document.body.classList.remove('banner-visible');
+  });
+
+  // Custom cursor
+  const cursor = document.getElementById('cursor');
+  const ring = document.getElementById('cursorRing');
+  let mx = 0, my = 0, rx = 0, ry = 0;
+  document.addEventListener('mousemove', e => {
+    mx = e.clientX; my = e.clientY;
+    cursor.style.left = mx + 'px';
+    cursor.style.top = my + 'px';
+  });
+  function animRing() {
+    rx += (mx - rx) * 0.12;
+    ry += (my - ry) *.12;
+    ring.style.left = rx + 'px';
+    ring.style.top = ry + 'px';
+    requestAnimationFrame(animRing);
+  }
+  animRing();
+
+  // Reveal on scroll
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => entry.target.classList.add('visible'), i * 80);
+      }
+    });
+  }, { threshold: 0.1 });
+  reveals.forEach(el => observer.observe(el));
+
+  // Countdown to LA 2028 (July 14, 2028)
+  const target = new Date('2028-07-14T00:00:00').getTime();
+  function updateCountdown() {
+    const now = new Date().getTime();
+    const diff = target - now;
+    if (diff < 0) return;
+    const d = Math.floor(diff / 86400000);
+    const h = Math.floor((diff % 86400000) / 3600000);
+    const m = Math.floor((diff % 3600000) / 60000);
+    const s = Math.floor((diff % 60000) / 1000);
+    document.getElementById('cd-days').textContent  = String(d).padStart(3,'0');
+    document.getElementById('cd-hours').textContent = String(h).padStart(2,'0');
+    document.getElementById('cd-mins').textContent  = String(m).padStart(2,'0');
+    document.getElementById('cd-secs').textContent  = String(s).padStart(2,'0');
+  }
+  updateCountdown();
+  setInterval(updateCountdown, 1000);
+</script>
+</body>
+</html>
