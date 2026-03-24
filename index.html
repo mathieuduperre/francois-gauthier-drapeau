@@ -96,9 +96,9 @@
   .hero-bg {
     position: absolute; inset: 0;
     background: 
-      radial-gradient(ellipse at 30% 50%, rgba(200,16,46,0.12) 0%, transparent 60%),
-      radial-gradient(ellipse at 80% 20%, rgba(212,175,55,0.06) 0%, transparent 50%),
-      var(--dark);
+      linear-gradient(to right, rgba(10,10,10,0.85) 0%, rgba(10,10,10,0.4) 50%, rgba(10,10,10,0.7) 100%),
+      linear-gradient(to top, rgba(10,10,10,0.9) 0%, transparent 40%),
+      url('https://78884ca60822a34fb0e6-082b8fd5551e97bc65e327988b444396.ssl.cf3.rackcdn.com/up/2025/11/GMS_8478-1764428925-1764428925.jpg') center center / cover no-repeat;
   }
 
   /* Animated tatami grid */
@@ -732,6 +732,45 @@
   }
   .quote-attr span { color: var(--gray); }
 
+  /* ── PHOTO STRIP ── */
+  .photo-strip {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    margin: 3rem 0 5rem;
+  }
+  .photo-strip-item {
+    position: relative;
+    aspect-ratio: 4/3;
+    overflow: hidden;
+    border: 1px solid rgba(255,255,255,0.06);
+  }
+  .photo-strip-item img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    object-position: center top;
+    transition: transform 0.5s ease, filter 0.5s ease;
+    filter: grayscale(20%);
+  }
+  .photo-strip-item:hover img {
+    transform: scale(1.05);
+    filter: grayscale(0%);
+  }
+  .photo-strip-caption {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    background: linear-gradient(to top, rgba(10,10,10,0.9), transparent);
+    padding: 1.5rem 1rem 0.7rem;
+    font-family: 'Space Mono', monospace;
+    font-size: 0.55rem;
+    letter-spacing: 0.15em;
+    color: var(--gold-light);
+    text-transform: uppercase;
+  }
+  @media (max-width: 900px) {
+    .photo-strip { grid-template-columns: 1fr; }
+  }
+
   /* ── COACH ── */
   #coach {
     background: var(--dark2);
@@ -1259,21 +1298,14 @@
 <section id="about">
   <div class="about-left">
     <div class="about-portrait-frame">
-      <!-- We use a real photo via the Wikimedia/Team Canada source -->
       <img
         class="portrait-img"
-        src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d6/Fran%C3%A7ois_Gauthier-Drapeau_2024_Olympics.jpg/800px-Fran%C3%A7ois_Gauthier-Drapeau_2024_Olympics.jpg"
-        alt="François Gauthier-Drapeau"
-        onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
+        src="https://78884ca60822a34fb0e6-082b8fd5551e97bc65e327988b444396.ssl.cf3.rackcdn.com/up/2025/11/GMS_8546-1764428961-1764428961.jpg"
+        alt="François Gauthier-Drapeau — Champion Grand Slam Abu Dhabi 2025"
+        onerror="this.src='https://upload.wikimedia.org/wikipedia/commons/thumb/d/d6/Fran%C3%A7ois_Gauthier-Drapeau_2024_Olympics.jpg/800px-Fran%C3%A7ois_Gauthier-Drapeau_2024_Olympics.jpg';"
       >
-      <div class="portrait-placeholder" style="display:none;">
-        <svg width="80" height="80" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <circle cx="40" cy="28" r="16" stroke="white" stroke-width="2"/>
-          <path d="M8 72c0-17.673 14.327-32 32-32s32 14.327 32 32" stroke="white" stroke-width="2"/>
-        </svg>
-        <p>Photo: IJF / Judo Canada</p>
-      </div>
       <div class="about-corner-tag">Olympien Paris 2024</div>
+      <div style="position:absolute; bottom:2.5rem; left:0; right:0; text-align:center; font-family:'Space Mono',monospace; font-size:0.45rem; letter-spacing:0.1em; color:rgba(255,255,255,0.4); z-index:3;">📷 Gabriela Sabau / IJF</div>
     </div>
   </div>
   <div class="about-right">
@@ -1401,6 +1433,28 @@
       <div class="medal-event">Grand Slam</div>
       <div class="medal-name">Grand Slam Tokyo</div>
       <div class="medal-year">2024 · –81 kg</div>
+    </div>
+  </div>
+
+  <!-- PHOTO STRIP -->
+  <div class="photo-strip reveal">
+    <div class="photo-strip-item">
+      <img src="https://78884ca60822a34fb0e6-082b8fd5551e97bc65e327988b444396.ssl.cf3.rackcdn.com/up/2025/11/GMS_8478-1764428925-1764428925.jpg"
+           alt="François Gauthier-Drapeau en finale Abu Dhabi 2025"
+           onerror="this.parentElement.style.display='none'">
+      <div class="photo-strip-caption">Finale · Abu Dhabi GS 2025 🥇</div>
+    </div>
+    <div class="photo-strip-item">
+      <img src="https://78884ca60822a34fb0e6-082b8fd5551e97bc65e327988b444396.ssl.cf3.rackcdn.com/up/2025/11/GMS_8546-1764428961-1764428961.jpg"
+           alt="François Gauthier-Drapeau médaille d'or Abu Dhabi 2025"
+           onerror="this.parentElement.style.display='none'">
+      <div class="photo-strip-caption">Cérémonie · Abu Dhabi GS 2025</div>
+    </div>
+    <div class="photo-strip-item">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d6/Fran%C3%A7ois_Gauthier-Drapeau_2024_Olympics.jpg/800px-Fran%C3%A7ois_Gauthier-Drapeau_2024_Olympics.jpg"
+           alt="François Gauthier-Drapeau Jeux Olympiques Paris 2024"
+           onerror="this.parentElement.style.display='none'">
+      <div class="photo-strip-caption">Jeux Olympiques · Paris 2024</div>
     </div>
   </div>
 
@@ -1566,14 +1620,18 @@
 <!-- COACH -->
 <section id="coach">
   <div class="coach-img-wrap reveal">
-    <div class="coach-img-inner">
-      <div style="text-align:center; padding: 2rem;">
-        <div style="font-size:5rem;">🥋</div>
-        <p style="font-family:'Bebas Neue',sans-serif; font-size:1.5rem; color:var(--white); margin-top:1rem;">Duo Valois-Fortier / Gauthier-Drapeau</p>
-        <p style="font-family:'Space Mono',monospace; font-size:0.6rem; letter-spacing:0.15em; color:var(--gray); margin-top:0.5rem;">Maître & Champion</p>
-      </div>
+    <div class="coach-img-inner" style="padding:0; overflow:hidden;">
+      <img
+        src="https://78884ca60822a34fb0e6-082b8fd5551e97bc65e327988b444396.ssl.cf3.rackcdn.com/up/2025/11/GMS_8478-1764428925-1764428925.jpg"
+        alt="François Gauthier-Drapeau en action"
+        style="width:100%; height:100%; object-fit:cover; object-position:center; filter:grayscale(30%) contrast(1.1); transition:filter 0.4s;"
+        onmouseover="this.style.filter='grayscale(0%) contrast(1.05)'"
+        onmouseout="this.style.filter='grayscale(30%) contrast(1.1)'"
+        onerror="this.parentElement.innerHTML='<div style=\'display:flex;align-items:center;justify-content:center;height:100%;font-size:4rem;\'>🥋</div>'"
+      >
     </div>
     <div class="coach-label-tag">Entraîneur national</div>
+    <div style="position:absolute; bottom:0.5rem; right:0.5rem; font-family:'Space Mono',monospace; font-size:0.45rem; letter-spacing:0.1em; color:rgba(255,255,255,0.4);">📷 Gabriela Sabau / IJF</div>
   </div>
   <div class="reveal">
     <p class="section-label">L'homme derrière le champion</p>
@@ -1756,8 +1814,8 @@
       <h3 class="sponsor-cta-title">Contactez-moi !</h3>
       <p class="sponsor-cta-sub">Vous avez une idée de collaboration ? Discutons-en — chaque partenariat est unique.</p>
       <div class="sponsor-contact-wrap">
-        <a href="mailto:frankyboy10@hotmail.ca" class="sponsor-contact-btn btn-gold">
-          ✉ frankyboy10@hotmail.ca
+        <a href="/cdn-cgi/l/email-protection#92f4e0f3fcf9ebf0fdeba3a2d2fafde6fff3fbfebcf1f3" class="sponsor-contact-btn btn-gold">
+          ✉ <span class="__cf_email__" data-cfemail="721400131c190b101d0b4342321a1d061f131b1e5c1113">[email&#160;protected]</span>
         </a>
         <a href="https://www.instagram.com/francoisgauthierd" target="_blank" rel="noopener" class="sponsor-contact-btn btn-outline">
           📷 @francoisgauthierd
@@ -1780,7 +1838,7 @@
   </div>
 </footer>
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
   // Sponsorship banner
   const banner = document.getElementById('sponsorBanner');
   const closeBtn = document.getElementById('closeBanner');
@@ -1831,11 +1889,4 @@
     const s = Math.floor((diff % 60000) / 1000);
     document.getElementById('cd-days').textContent  = String(d).padStart(3,'0');
     document.getElementById('cd-hours').textContent = String(h).padStart(2,'0');
-    document.getElementById('cd-mins').textContent  = String(m).padStart(2,'0');
-    document.getElementById('cd-secs').textContent  = String(s).padStart(2,'0');
-  }
-  updateCountdown();
-  setInterval(updateCountdown, 1000);
-</script>
-</body>
-</html>
+  
