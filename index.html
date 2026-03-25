@@ -115,7 +115,7 @@
     background:
       linear-gradient(to right, rgba(10,10,10,0.92) 0%, rgba(10,10,10,0.5) 55%, rgba(10,10,10,0.75) 100%),
       linear-gradient(to top, rgba(10,10,10,0.95) 0%, transparent 45%),
-      url('6.jpg') center center / cover no-repeat;
+      url('12.jpg') center center / cover no-repeat;
   }
   .tatami-grid {
     position: absolute; inset: 0;
@@ -577,7 +577,8 @@
 
   /* ── OLYMPICS ── */
   #olympics {
-    background: linear-gradient(160deg, #0d0d0d 0%, #1a0808 40%, #080814 100%);
+    background: linear-gradient(160deg, rgba(13,13,13,0.97) 0%, rgba(26,8,8,0.95) 40%, rgba(8,8,20,0.97) 100%),
+      url('14.jpg') center 30% / cover no-repeat;
     text-align: center; position: relative; overflow: hidden;
   }
   .olympics-ring-1 {
@@ -898,7 +899,7 @@
 
 <!-- NAV -->
 <nav id="mainNav">
-  <a href="#hero" class="nav-logo">FLAG<span>.</span></a>
+  <a href="#hero" class="nav-logo">FGD<span>.</span></a>
   <ul class="nav-links">
     <li><a href="#about">Biographie</a></li>
     <li><a href="#palmares">Palmarès</a></li>
@@ -951,14 +952,14 @@
 <section id="about">
   <div class="reveal">
     <div class="about-portrait-frame">
-      <img src="4.png" alt="François Gauthier-Drapeau">
+      <img src="14.jpg" alt="François Gauthier-Drapeau — Olympien Canada">
       <div class="portrait-tag">Olympien Paris 2024</div>
     </div>
   </div>
 
   <div>
     <span class="section-label reveal">Biographie</span>
-    <h2 class="section-title reveal">Une étoile<br>montante</h2>
+    <h2 class="section-title reveal">L'homme<br>du tatami</h2>
     <div class="about-bio reveal">
       <p>Né le <strong>27 janvier 1998</strong> à <strong>Alma, au Lac-Saint-Jean</strong>, François Gauthier-Drapeau est aujourd'hui l'un des judokas les plus redoutables au monde. Représentant le Canada dans la catégorie des <em>moins de 81 kg</em>, il incarne la nouvelle génération du judo canadien — combatif, intelligent, et décisif sur le tatami.</p>
       <p>Son parcours vers le sommet n'a pas été sans obstacles. Une <strong>grave blessure au genou en 2018</strong>, suivie de l'arrêt forcé causé par la pandémie de COVID-19, l'ont éloigné de la compétition pendant plusieurs années. Mais François est revenu avec une détermination encore plus grande, transformant chaque épreuve en force.</p>
@@ -1112,16 +1113,31 @@
 
   <div class="photo-strip reveal">
     <div class="photo-strip-item">
-      <img src="6.jpg" alt="François Gauthier-Drapeau — Abu Dhabi Grand Slam 2025">
-      <div class="photo-strip-caption">Finale · Abu Dhabi GS 2025 🥇</div>
+      <img src="17.jpg" alt="François Gauthier-Drapeau — Victoire Grand Slam Paris 2025">
+      <div class="photo-strip-caption">Victoire · Grand Slam Paris 2025 🥇</div>
     </div>
     <div class="photo-strip-item">
-      <img src="3.jpg" alt="François Gauthier-Drapeau — Action IJF">
-      <div class="photo-strip-caption">En action · Circuit IJF</div>
+      <img src="15.jpg" alt="François Gauthier-Drapeau — Action Grand Slam Antalya">
+      <div class="photo-strip-caption">En action · Grand Slam Antalya</div>
     </div>
     <div class="photo-strip-item">
-      <img src="5.jpg" alt="François Gauthier-Drapeau — Équipe Canada">
-      <div class="photo-strip-caption">Judoka Canadien · Équipe Canada</div>
+      <img src="16.jpg" alt="François Gauthier-Drapeau — Projection Grand Slam Paris">
+      <div class="photo-strip-caption">Ippon · Grand Slam Paris · IJF</div>
+    </div>
+  </div>
+
+  <div class="photo-strip reveal" style="margin-top:1rem;">
+    <div class="photo-strip-item">
+      <img src="13.jpg" alt="François Gauthier-Drapeau — Médaille podium Paris">
+      <div class="photo-strip-caption">Podium · Grand Slam Paris · Médaille 🏅</div>
+    </div>
+    <div class="photo-strip-item">
+      <img src="18.jpg" alt="François Gauthier-Drapeau — Podium officiel Grand Slam Paris 2025">
+      <div class="photo-strip-caption">Cérémonie officielle · Grand Slam Paris 2025</div>
+    </div>
+    <div class="photo-strip-item">
+      <img src="6.jpg" alt="François Gauthier-Drapeau — Abu Dhabi Grand Slam">
+      <div class="photo-strip-caption">En action · Grand Slam Abu Dhabi 🥇</div>
     </div>
   </div>
 
@@ -1205,6 +1221,17 @@
   </div>
 </section>
 
+<!-- CELEBRATION BANNER -->
+<div style="width:100%; height:500px; overflow:hidden; position:relative;">
+  <img src="17.jpg" alt="François Gauthier-Drapeau — Célébration victoire"
+       style="width:100%; height:100%; object-fit:cover; object-position:center 30%; filter:brightness(0.85);">
+  <div style="position:absolute; inset:0; background:linear-gradient(to right, rgba(10,10,10,0.7) 0%, transparent 50%, rgba(10,10,10,0.5) 100%);"></div>
+  <div style="position:absolute; bottom:3rem; left:4rem;">
+    <p style="font-family:'Space Mono',monospace; font-size:0.65rem; letter-spacing:0.3em; color:var(--gold); text-transform:uppercase; margin-bottom:0.5rem;">Grand Slam Paris · Février 2025</p>
+    <p style="font-family:'Bebas Neue',sans-serif; font-size:clamp(2rem,5vw,4.5rem); color:var(--white); line-height:1; letter-spacing:0.04em;">Champion.<br>Pour la première fois à Paris.</p>
+  </div>
+</div>
+
 <!-- QUOTE -->
 <section id="quote">
   <blockquote>
@@ -1220,82 +1247,58 @@
   <p class="videos-intro reveal">Revivez les meilleurs moments de François Gauthier-Drapeau sur le circuit mondial IJF — des combats intenses, des techniques spectaculaires, et des victoires mémorables.</p>
 
   <div class="videos-grid reveal">
-
-  <div class="video-card">
-    <div class="video-thumb">
-      <iframe 
-        src="https://www.youtube.com/embed/th7Xb3QvYMw"
-        title="Abu Dhabi Grand Slam 2025"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-        allowfullscreen
-        loading="lazy">
-      </iframe>
+    <div class="video-card">
+      <div class="video-thumb">
+        <iframe src="https://www.youtube.com/embed/8r2IM09-bj4" title="Grand Slam Paris 2025" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
+      </div>
+      <div class="video-info">
+        <div class="video-tag">Grand Slam · Paris 2025</div>
+        <div class="video-title">François Gauthier-Drapeau — Champion à Paris 🥇</div>
+      </div>
     </div>
-    <div class="video-info">
-      <div class="video-tag">Grand Slam · Abu Dhabi 2025</div>
-      <div class="video-title">François Gauthier-Drapeau — Grand Slam Abu Dhabi 🥇</div>
+    <div class="video-card">
+      <div class="video-thumb">
+        <iframe src="https://www.youtube.com/embed/2RBNRnBmGb0" title="Jeux Olympiques Paris 2024" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
+      </div>
+      <div class="video-info">
+        <div class="video-tag">Jeux Olympiques · Paris 2024</div>
+        <div class="video-title">François Gauthier-Drapeau aux Jeux de Paris</div>
+      </div>
     </div>
-  </div>
-
-  <div class="video-card">
-    <div class="video-thumb">
-      <iframe 
-        src="https://www.youtube.com/embed/MquVEzCmqcw"
-        title="Paris Grand Slam 2025"
-        allowfullscreen
-        loading="lazy">
-      </iframe>
+    <div class="video-card">
+      <div class="video-thumb">
+        <iframe src="https://www.youtube.com/embed/Y7M_bqbFHKA" title="Antalya Grand Slam 2024" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
+      </div>
+      <div class="video-info">
+        <div class="video-tag">Grand Slam · Antalya 2024</div>
+        <div class="video-title">Finale face à Nagase — Argent historique 🥈</div>
+      </div>
     </div>
-    <div class="video-info">
-      <div class="video-tag">Paris Grand Slam 2025</div>
-      <div class="video-title">François Gauthier-Drapeau aux Grand Slam de Paris</div>
-    </div>
-  </div>
-
-  <div class="video-card">
-    <div class="video-thumb">
-      <iframe 
-        src="https://www.youtube.com/embed/oX9RmTg46dM"
-        title="Antalya Grand Slam 2024"
-        allowfullscreen
-        loading="lazy">
-      </iframe>
-    </div>
-    <div class="video-info">
-      <div class="video-tag">Grand Slam · Antalya 2024</div>
-      <div class="video-title">Finale face à Nagase — Argent historique 🥈</div>
+    <div class="video-card">
+      <div class="video-thumb">
+        <iframe src="https://www.youtube.com/embed/videoseries?list=PLwMQAGZFhcKgIFwSHyM5mFXBJAGhK0A_Y" title="Highlights judo" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
+      </div>
+      <div class="video-info">
+        <div class="video-tag">Highlights · IJF World Tour</div>
+        <div class="video-title">Les meilleurs ippons de François Gauthier-Drapeau</div>
+      </div>
     </div>
   </div>
-
-  <div class="video-card">
-    <div class="video-thumb">
-      <iframe 
-        src="https://www.youtube.com/embed/VNgnMVIqQrE"
-        title="Highlights judo"
-        allowfullscreen
-        loading="lazy">
-      </iframe>
-    </div>
-    <div class="video-info">
-      <div class="video-tag">Final Commonwealth Games</div>
-      <div class="video-title">François Gauthier-Drapeau final Commonwealth Games</div>
-    </div>
+  <div style="text-align:center; margin-top:2.5rem;" class="reveal">
+    <a href="https://www.youtube.com/results?search_query=Gauthier+Drapeau+judo" target="_blank" rel="noopener"
+       style="display:inline-block; padding:1rem 2.5rem; border:1px solid var(--red); color:var(--red); font-family:'Space Mono',monospace; font-size:0.65rem; letter-spacing:0.2em; text-transform:uppercase; text-decoration:none; transition: background 0.3s, color 0.3s;"
+       onmouseover="this.style.background='var(--red)'; this.style.color='white';"
+       onmouseout="this.style.background='transparent'; this.style.color='var(--red)';">
+      Voir plus sur YouTube →
+    </a>
   </div>
-
-</div>
-
-<div class="video-cta reveal">
-  <a href="https://www.youtube.com/results?search_query=Gauthier+Drapeau+judo" target="_blank" rel="noopener">
-    Voir plus sur YouTube →
-  </a>
-</div>
 </section>
 
 <!-- COACH -->
 <section id="coach">
   <div class="coach-img-wrap reveal">
     <div class="coach-img-inner">
-      <img src="1.jpg" alt="François Gauthier-Drapeau en action">
+      <img src="11.jpg" alt="François Gauthier-Drapeau à l'entraînement">
     </div>
     <div class="coach-label-tag">Entraîneur national</div>
   </div>
@@ -1480,7 +1483,7 @@
       <h3 class="sponsor-cta-title">Contactez-moi !</h3>
       <p class="sponsor-cta-sub">Vous avez une idée de collaboration ? Discutons-en — chaque partenariat est unique et personnalisé.</p>
       <div class="sponsor-contact-wrap">
-        <a href="mailto:frankyboy10@hotmail.ca" class="sponsor-btn btn-gold">✉ frankyboy10@hotmail.ca</a>
+        <a href="/cdn-cgi/l/email-protection#5a3c283b3431233835236b6a1a32352e373b333674393b" class="sponsor-btn btn-gold">✉ <span class="__cf_email__" data-cfemail="56302437383d2f34392f6766163e39223b373f3a783537">[email&#160;protected]</span></a>
         <a href="https://www.instagram.com/francoisgauthierd" target="_blank" rel="noopener" class="sponsor-btn btn-outline">📷 @francoisgauthierd</a>
       </div>
     </div>
@@ -1500,7 +1503,7 @@
   </div>
 </footer>
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
   // Banner close
   const banner = document.getElementById('sponsorBanner');
   const nav = document.getElementById('mainNav');
@@ -1527,11 +1530,4 @@
     if (diff < 0) return;
     document.getElementById('cd-days').textContent  = String(Math.floor(diff / 86400000)).padStart(3,'0');
     document.getElementById('cd-hours').textContent = String(Math.floor((diff % 86400000) / 3600000)).padStart(2,'0');
-    document.getElementById('cd-mins').textContent  = String(Math.floor((diff % 3600000) / 60000)).padStart(2,'0');
-    document.getElementById('cd-secs').textContent  = String(Math.floor((diff % 60000) / 1000)).padStart(2,'0');
-  }
-  updateCountdown();
-  setInterval(updateCountdown, 1000);
-</script>
-</body>
-</html>
+    document.getElementById('cd-mins').textContent  = String(Math.flo
