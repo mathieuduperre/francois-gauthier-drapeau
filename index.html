@@ -243,10 +243,14 @@
     color: var(--white);
   }
   .reveal {
-    opacity: 0; transform: translateY(35px);
+    opacity: 1;
+    transform: translateY(0);
     transition: opacity 0.9s ease, transform 0.9s ease;
   }
-  .reveal.visible { opacity: 1; transform: translateY(0); }
+  .reveal.hidden {
+    opacity: 0;
+    transform: translateY(35px);
+  }
 
   /* ── ABOUT ── */
   #about {
@@ -1512,12 +1516,14 @@
     nav.classList.add('no-banner');
   });
 
-  // Scroll reveal
+  // Scroll reveal - content visible by default, animate on scroll
   const reveals = document.querySelectorAll('.reveal');
+  reveals.forEach(el => el.classList.add('hidden'));
   const observer = new IntersectionObserver((entries) => {
     entries.forEach((entry, i) => {
       if (entry.isIntersecting) {
-        setTimeout(() => entry.target.classList.add('visible'), i * 60);
+        setTimeout(() => entry.target.classList.remove('hidden'), i * 60);
+        observer.unobserve(entry.target);
       }
     });
   }, { threshold: 0.08 });
