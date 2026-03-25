@@ -520,8 +520,14 @@
     overflow: hidden;
     transition: border-color 0.3s, transform 0.3s;
   }
-  .video-card:hover { border-color: var(--red); transform: scale(1.01); }
-  .video-thumb { aspect-ratio: 16/9; overflow: hidden; }
+  .video-card:hover {
+  border-color: var(--red);
+  }
+  .video-thumb {
+  position: relative;
+  aspect-ratio: 16/9;
+  overflow: hidden;
+  }
   .video-thumb iframe { width: 100%; height: 100%; border: none; display: block; }
   .video-info { padding: 1.2rem 1.5rem; }
   .video-tag {
@@ -1250,79 +1256,86 @@
   <p class="videos-intro">Revivez les meilleurs moments de François Gauthier-Drapeau sur le circuit mondial IJF — des combats intenses, des techniques spectaculaires, et des victoires mémorables.</p>
 
   <div class="videos-grid">
-    <a class="video-card" href="https://www.youtube.com/results?search_query=Gauthier+Drapeau+judo+Paris+2025" target="_blank" rel="noopener" style="text-decoration:none; display:block;">
-      <div class="video-thumb" style="background:linear-gradient(135deg,#1a0505,#2a0a0a); display:flex; flex-direction:column; align-items:center; justify-content:center; gap:1rem;">
-        <img src="17.jpg" alt="Paris 2025" style="width:100%; height:100%; object-fit:cover; object-position:center; opacity:0.7; position:absolute; inset:0;">
-        <div style="position:relative; z-index:2; text-align:center;">
-          <div style="width:60px; height:60px; background:rgba(200,16,46,0.9); border-radius:50%; display:flex; align-items:center; justify-content:center; margin:0 auto;">
-            <span style="font-size:1.5rem; margin-left:4px;">▶</span>
+
+    <a href="https://www.youtube.com/results?search_query=Gauthier+Drapeau+judo+Paris+2025" target="_blank" rel="noopener" style="text-decoration:none; color:inherit;">
+      <div class="video-card">
+        <div class="video-thumb">
+          <img src="17.jpg" alt="Grand Slam Paris 2025" style="width:100%; height:100%; object-fit:cover; object-position:center; display:block;">
+          <div style="position:absolute; inset:0; background:rgba(0,0,0,0.35); display:flex; align-items:center; justify-content:center;">
+            <div style="width:56px; height:56px; background:var(--red); border-radius:50%; display:flex; align-items:center; justify-content:center; flex-shrink:0;">
+              <span style="font-size:1.3rem; margin-left:5px; color:white;">▶</span>
+            </div>
           </div>
-          <p style="font-family:'Space Mono',monospace; font-size:0.6rem; letter-spacing:0.15em; color:white; margin-top:0.8rem; text-transform:uppercase;">Voir sur YouTube</p>
         </div>
-      </div>
-      <div class="video-info">
-        <div class="video-tag">Grand Slam · Paris 2025</div>
-        <div class="video-title">François Gauthier-Drapeau — Champion à Paris 🥇</div>
+        <div class="video-info">
+          <div class="video-tag">Grand Slam · Paris 2025</div>
+          <div class="video-title">François Gauthier-Drapeau — Champion à Paris 🥇</div>
+        </div>
       </div>
     </a>
 
-    <a class="video-card" href="https://www.youtube.com/results?search_query=Gauthier+Drapeau+judo+Abu+Dhabi+2025" target="_blank" rel="noopener" style="text-decoration:none; display:block;">
-      <div class="video-thumb" style="position:relative; background:#111;">
-        <img src="6.jpg" alt="Abu Dhabi 2025" style="width:100%; height:100%; object-fit:cover; opacity:0.7; position:absolute; inset:0;">
-        <div style="position:relative; z-index:2; display:flex; flex-direction:column; align-items:center; justify-content:center; height:100%; gap:0.8rem;">
-          <div style="width:60px; height:60px; background:rgba(200,16,46,0.9); border-radius:50%; display:flex; align-items:center; justify-content:center;">
-            <span style="font-size:1.5rem; margin-left:4px;">▶</span>
+    <a href="https://www.youtube.com/results?search_query=Gauthier+Drapeau+judo+Abu+Dhabi+2025" target="_blank" rel="noopener" style="text-decoration:none; color:inherit;">
+      <div class="video-card">
+        <div class="video-thumb">
+          <img src="6.jpg" alt="Grand Slam Abu Dhabi 2025" style="width:100%; height:100%; object-fit:cover; object-position:center; display:block;">
+          <div style="position:absolute; inset:0; background:rgba(0,0,0,0.35); display:flex; align-items:center; justify-content:center;">
+            <div style="width:56px; height:56px; background:var(--red); border-radius:50%; display:flex; align-items:center; justify-content:center; flex-shrink:0;">
+              <span style="font-size:1.3rem; margin-left:5px; color:white;">▶</span>
+            </div>
           </div>
-          <p style="font-family:'Space Mono',monospace; font-size:0.6rem; letter-spacing:0.15em; color:white; text-transform:uppercase;">Voir sur YouTube</p>
         </div>
-      </div>
-      <div class="video-info">
-        <div class="video-tag">Grand Slam · Abu Dhabi 2025</div>
-        <div class="video-title">François Gauthier-Drapeau — Champion à Abu Dhabi 🥇</div>
+        <div class="video-info">
+          <div class="video-tag">Grand Slam · Abu Dhabi 2025</div>
+          <div class="video-title">François Gauthier-Drapeau — Champion à Abu Dhabi 🥇</div>
+        </div>
       </div>
     </a>
 
-    <a class="video-card" href="https://www.youtube.com/results?search_query=Gauthier+Drapeau+judo+Antalya+2024+Nagase" target="_blank" rel="noopener" style="text-decoration:none; display:block;">
-      <div class="video-thumb" style="position:relative; background:#111;">
-        <img src="15.jpg" alt="Antalya 2024" style="width:100%; height:100%; object-fit:cover; opacity:0.7; position:absolute; inset:0;">
-        <div style="position:relative; z-index:2; display:flex; flex-direction:column; align-items:center; justify-content:center; height:100%; gap:0.8rem;">
-          <div style="width:60px; height:60px; background:rgba(200,16,46,0.9); border-radius:50%; display:flex; align-items:center; justify-content:center;">
-            <span style="font-size:1.5rem; margin-left:4px;">▶</span>
+    <a href="https://www.youtube.com/results?search_query=Gauthier+Drapeau+judo+Antalya+2024+Nagase" target="_blank" rel="noopener" style="text-decoration:none; color:inherit;">
+      <div class="video-card">
+        <div class="video-thumb">
+          <img src="15.jpg" alt="Grand Slam Antalya 2024" style="width:100%; height:100%; object-fit:cover; object-position:center; display:block;">
+          <div style="position:absolute; inset:0; background:rgba(0,0,0,0.35); display:flex; align-items:center; justify-content:center;">
+            <div style="width:56px; height:56px; background:var(--red); border-radius:50%; display:flex; align-items:center; justify-content:center; flex-shrink:0;">
+              <span style="font-size:1.3rem; margin-left:5px; color:white;">▶</span>
+            </div>
           </div>
-          <p style="font-family:'Space Mono',monospace; font-size:0.6rem; letter-spacing:0.15em; color:white; text-transform:uppercase;">Voir sur YouTube</p>
         </div>
-      </div>
-      <div class="video-info">
-        <div class="video-tag">Grand Slam · Antalya 2024</div>
-        <div class="video-title">Finale face à Nagase — Argent historique 🥈</div>
+        <div class="video-info">
+          <div class="video-tag">Grand Slam · Antalya 2024</div>
+          <div class="video-title">Finale face à Nagase — Argent historique 🥈</div>
+        </div>
       </div>
     </a>
 
-    <a class="video-card" href="https://www.youtube.com/results?search_query=Gauthier+Drapeau+judo+olympiques+Paris+2024" target="_blank" rel="noopener" style="text-decoration:none; display:block;">
-      <div class="video-thumb" style="position:relative; background:#111;">
-        <img src="14.jpg" alt="Paris 2024 Olympics" style="width:100%; height:100%; object-fit:cover; object-position:center 20%; opacity:0.7; position:absolute; inset:0;">
-        <div style="position:relative; z-index:2; display:flex; flex-direction:column; align-items:center; justify-content:center; height:100%; gap:0.8rem;">
-          <div style="width:60px; height:60px; background:rgba(200,16,46,0.9); border-radius:50%; display:flex; align-items:center; justify-content:center;">
-            <span style="font-size:1.5rem; margin-left:4px;">▶</span>
+    <a href="https://www.youtube.com/results?search_query=Gauthier+Drapeau+judo+olympiques+Paris+2024" target="_blank" rel="noopener" style="text-decoration:none; color:inherit;">
+      <div class="video-card">
+        <div class="video-thumb">
+          <img src="14.jpg" alt="Jeux Olympiques Paris 2024" style="width:100%; height:100%; object-fit:cover; object-position:center 20%; display:block;">
+          <div style="position:absolute; inset:0; background:rgba(0,0,0,0.35); display:flex; align-items:center; justify-content:center;">
+            <div style="width:56px; height:56px; background:var(--red); border-radius:50%; display:flex; align-items:center; justify-content:center; flex-shrink:0;">
+              <span style="font-size:1.3rem; margin-left:5px; color:white;">▶</span>
+            </div>
           </div>
-          <p style="font-family:'Space Mono',monospace; font-size:0.6rem; letter-spacing:0.15em; color:white; text-transform:uppercase;">Voir sur YouTube</p>
+        </div>
+        <div class="video-info">
+          <div class="video-tag">Jeux Olympiques · Paris 2024</div>
+          <div class="video-title">François aux Jeux de Paris — Équipe Canada</div>
         </div>
       </div>
-      <div class="video-info">
-        <div class="video-tag">Jeux Olympiques · Paris 2024</div>
-        <div class="video-title">François aux Jeux de Paris — Équipe Canada</div>
-      </div>
     </a>
+
   </div>
 
   <div style="text-align:center; margin-top:2.5rem;">
     <a href="https://www.youtube.com/results?search_query=Gauthier+Drapeau+judo" target="_blank" rel="noopener"
-       style="display:inline-block; padding:1rem 2.5rem; border:1px solid var(--red); color:var(--red); font-family:'Space Mono',monospace; font-size:0.65rem; letter-spacing:0.2em; text-transform:uppercase; text-decoration:none; transition: background 0.3s, color 0.3s;"
-       >
+       style="display:inline-block; padding:1rem 2.5rem; border:1px solid var(--red); color:var(--red); font-family:'Space Mono',monospace; font-size:0.65rem; letter-spacing:0.2em; text-transform:uppercase; text-decoration:none; transition:background 0.3s, color 0.3s;"
+       onmouseover="this.style.background='var(--red)'; this.style.color='white';"
+       onmouseout="this.style.background='transparent'; this.style.color='var(--red)';">
       Voir plus sur YouTube →
     </a>
   </div>
-</section>
+</section>  
 
 <!-- COACH -->
 <section id="coach">
