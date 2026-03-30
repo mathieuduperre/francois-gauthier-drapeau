@@ -938,7 +938,7 @@
   <span data-lang="en">Associate your brand with a Canadian Olympian</span>
   <a href="#sponsorship" class="cta" data-lang="fr">Découvrir →</a>
   <a href="#sponsorship" class="cta" data-lang="en">Learn more →</a>
-  <button class="banner-close" id="closeBanner" style="z-index:10; padding: 0.5rem 0.8rem;" onclick="document.getElementById('sponsorBanner').style.display='none'; document.getElementById('mainNav').classList.add('no-banner');">✕</button>
+  <button class="banner-close" id="closeBanner" style="z-index:10;padding:0.5rem 0.8rem;" onclick="document.getElementById('sponsorBanner').style.display='none';document.getElementById('mainNav').classList.add('no-banner');">✕</button>
 </div>
 
 <!-- NAV -->
@@ -1755,80 +1755,80 @@
   </div>
 </footer>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
-  // Language toggle — pure JS, no CSS dependency
-  // Map of tag names that need inline/inline-block display instead of block
-  const INLINE_TAGS = new Set(['SPAN','A','CITE','EM','STRONG','BUTTON']);
-  const INLINE_BLOCK_CLASSES = ['hero-eyebrow','hero-badge','hero-tagline','section-label','sponsor-btn','lang-btn'];
-
-  function getShowDisplay(el) {
-    if (INLINE_TAGS.has(el.tagName)) return 'inline';
-    for (const cls of INLINE_BLOCK_CLASSES) {
-      if (el.classList.contains(cls)) return 'inline-block';
-    }
-    return '';  // empty = remove inline style, let CSS decide
-  }
-
+<script>
+  // ── LANGUAGE TOGGLE ──
   function setLang(lang) {
-    document.getElementById('htmlRoot').setAttribute('lang', lang);
-    document.getElementById('btnFr').classList.toggle('active', lang === 'fr');
-    document.getElementById('btnEn').classList.toggle('active', lang === 'en');
+    var hideLang = lang === 'fr' ? 'en' : 'fr';
 
-    const hideLang = lang === 'fr' ? 'en' : 'fr';
-    document.querySelectorAll('[data-lang]').forEach(el => {
-      const elLang = el.getAttribute('data-lang');
+    var btnFr = document.getElementById('btnFr');
+    var btnEn = document.getElementById('btnEn');
+    if (btnFr) btnFr.classList.toggle('active', lang === 'fr');
+    if (btnEn) btnEn.classList.toggle('active', lang === 'en');
+    document.getElementById('htmlRoot').setAttribute('lang', lang);
+
+    document.querySelectorAll('[data-lang]').forEach(function(el) {
+      var elLang = el.getAttribute('data-lang');
       if (elLang === hideLang) {
         el.style.display = 'none';
       } else if (elLang === lang) {
-        const d = getShowDisplay(el);
-        el.style.display = d || '';
-        // If display is still 'none' after removing inline style (e.g. from a previous setLang call), force it
-        if (getComputedStyle(el).display === 'none') {
-          el.style.display = d || 'block';
+        var tag = el.tagName;
+        var d;
+        if (tag === 'SPAN' || tag === 'A' || tag === 'CITE' || tag === 'EM' || tag === 'STRONG') {
+          d = 'inline';
+        } else if (el.classList.contains('hero-eyebrow') || el.classList.contains('hero-badge') ||
+                   el.classList.contains('hero-tagline') || el.classList.contains('section-label') ||
+                   el.classList.contains('sponsor-btn')) {
+          d = 'inline-block';
+        } else {
+          d = 'block';
         }
+        el.style.display = d;
       }
     });
 
     try { localStorage.setItem('fgd-lang', lang); } catch(e) {}
   }
 
-  // Wire up language buttons (avoids ReferenceError from inline onclick before script loads)
-  document.getElementById('btnFr').addEventListener('click', () => setLang('fr'));
-  document.getElementById('btnEn').addEventListener('click', () => setLang('en'));
+  // Wire up buttons
+  document.getElementById('btnFr').addEventListener('click', function() { setLang('fr'); });
+  document.getElementById('btnEn').addEventListener('click', function() { setLang('en'); });
 
-  // Run on page load — determine language and apply consistently
-  let initialLang = 'fr';
+  // Initial language on load
+  var initialLang = 'fr';
   try {
-    const saved = localStorage.getItem('fgd-lang');
+    var saved = localStorage.getItem('fgd-lang');
     if (saved === 'en') initialLang = 'en';
   } catch(e) {}
   setLang(initialLang);
 
   // Banner close
-  const banner = document.getElementById('sponsorBanner');
-  const nav = document.getElementById('mainNav');
-  document.getElementById('closeBanner').addEventListener('click', () => {
-    banner.style.display = 'none';
-    nav.classList.add('no-banner');
-  });
+  var closeBtn = document.getElementById('closeBanner');
+  if (closeBtn) {
+    closeBtn.addEventListener('click', function() {
+      var b = document.getElementById('sponsorBanner');
+      var n = document.getElementById('mainNav');
+      if (b) b.style.display = 'none';
+      if (n) n.classList.add('no-banner');
+    });
+  }
 
   // Scroll reveal
-  const reveals = document.querySelectorAll('.reveal');
-  reveals.forEach(el => el.classList.add('hidden'));
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach((entry, i) => {
+  var reveals = document.querySelectorAll('.reveal');
+  reveals.forEach(function(el) { el.classList.add('hidden'); });
+  var observer = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry, i) {
       if (entry.isIntersecting) {
-        setTimeout(() => entry.target.classList.remove('hidden'), i * 60);
+        setTimeout(function() { entry.target.classList.remove('hidden'); }, i * 60);
         observer.unobserve(entry.target);
       }
     });
   }, { threshold: 0.08 });
-  reveals.forEach(el => observer.observe(el));
+  reveals.forEach(function(el) { observer.observe(el); });
 
-  // Countdown to LA 2028 Opening Ceremony (July 14, 2028)
-  const cdTarget = new Date('2028-07-14T20:00:00').getTime();
+  // Countdown to LA 2028 (July 14, 2028 20:00)
+  var cdTarget = new Date('2028-07-14T20:00:00').getTime();
   function updateCountdown() {
-    const diff = cdTarget - Date.now();
+    var diff = cdTarget - Date.now();
     if (diff < 0) {
       document.getElementById('cd-days').textContent  = '000';
       document.getElementById('cd-hours').textContent = '00';
@@ -1838,4 +1838,11 @@
     }
     document.getElementById('cd-days').textContent  = String(Math.floor(diff / 86400000)).padStart(3, '0');
     document.getElementById('cd-hours').textContent = String(Math.floor((diff % 86400000) / 3600000)).padStart(2, '0');
-    document.getElementById('cd-mins').text
+    document.getElementById('cd-mins').textContent  = String(Math.floor((diff % 3600000) / 60000)).padStart(2, '0');
+    document.getElementById('cd-secs').textContent  = String(Math.floor((diff % 60000) / 1000)).padStart(2, '0');
+  }
+  updateCountdown();
+  setInterval(updateCountdown, 1000);
+</script>
+</body>
+</html>
