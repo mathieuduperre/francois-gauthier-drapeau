@@ -59,21 +59,6 @@
   .lang-btn:not(.active):hover { color: var(--white); }
   .lang-divider { width: 1px; height: 100%; background: rgba(255,255,255,0.15); }
 
-  /* Hide/show language content */
-  [data-lang="en"] { display: none !important; }
-  html[lang="en"] [data-lang="en"] { display: block !important; }
-  html[lang="en"] [data-lang="fr"] { display: none !important; }
-  /* Inline elements need inline display not block */
-  html[lang="en"] span[data-lang="en"],
-  html[lang="en"] a[data-lang="en"],
-  html[lang="en"] cite[data-lang="en"],
-  html[lang="en"] strong[data-lang="en"],
-  html[lang="en"] em[data-lang="en"] { display: inline !important; }
-  /* inline-block elements */
-  html[lang="en"] .hero-eyebrow[data-lang="en"],
-  html[lang="en"] .hero-badge[data-lang="en"],
-  html[lang="en"] .hero-tagline[data-lang="en"] { display: inline-block !important; }
-
   /* ── SPONSOR BANNER ── */
   .sponsor-banner {
     position: fixed;
@@ -1576,8 +1561,8 @@
 
 <!-- LINKS -->
 <section id="links">
-  <span class="section-label reveal" style="text-align:center; display:block;" data-lang="fr">Suivre François</span>
-  <span class="section-label reveal" style="text-align:center; display:block;" data-lang="en">Follow François</span>
+  <span class="section-label reveal" style="text-align:center;" data-lang="fr">Suivre François</span>
+  <span class="section-label reveal" style="text-align:center;" data-lang="en">Follow François</span>
   <h2 class="section-title reveal" style="text-align:center;" data-lang="fr">Liens officiels</h2>
   <h2 class="section-title reveal" style="text-align:center;" data-lang="en">Official Links</h2>
   <div class="links-grid reveal">
@@ -1771,13 +1756,45 @@
 </footer>
 
 <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
-  // Language toggle
+  // Language toggle — pure JS, no CSS dependency
+  // Map of tag names that need inline/inline-block display instead of block
+  const INLINE_TAGS = new Set(['SPAN','A','CITE','EM','STRONG','BUTTON']);
+  const INLINE_BLOCK_CLASSES = ['hero-eyebrow','hero-badge','hero-tagline','section-label','sponsor-btn','lang-btn'];
+
+  function getShowDisplay(el) {
+    if (INLINE_TAGS.has(el.tagName)) return 'inline';
+    for (const cls of INLINE_BLOCK_CLASSES) {
+      if (el.classList.contains(cls)) return 'inline-block';
+    }
+    return '';  // empty = remove inline style, let CSS decide
+  }
+
   function setLang(lang) {
     document.getElementById('htmlRoot').setAttribute('lang', lang);
     document.getElementById('btnFr').classList.toggle('active', lang === 'fr');
     document.getElementById('btnEn').classList.toggle('active', lang === 'en');
+
+    const hideLang = lang === 'fr' ? 'en' : 'fr';
+    document.querySelectorAll('[data-lang]').forEach(el => {
+      const elLang = el.getAttribute('data-lang');
+      if (elLang === hideLang) {
+        el.style.display = 'none';
+      } else if (elLang === lang) {
+        const d = getShowDisplay(el);
+        el.style.display = d || '';
+        // If display is still 'none' after removing inline style (e.g. from a previous setLang call), force it
+        if (getComputedStyle(el).display === 'none') {
+          el.style.display = d || 'block';
+        }
+      }
+    });
+
     try { localStorage.setItem('fgd-lang', lang); } catch(e) {}
   }
+
+  // Run on page load — hide all EN elements immediately, then check saved preference
+  document.querySelectorAll('[data-lang="en"]').forEach(el => { el.style.display = 'none'; });
+
   // Restore saved preference
   try {
     const saved = localStorage.getItem('fgd-lang');
