@@ -155,10 +155,11 @@
   }
   .hero-name {
     font-family: 'Bebas Neue', sans-serif;
-    font-size: clamp(5rem, 11vw, 12rem);
-    line-height: 0.88;
+    font-size: clamp(4rem, 9vw, 10rem);
+    line-height: 1;
     letter-spacing: 0.02em;
     color: var(--white);
+    overflow: visible;
     opacity: 0;
     animation: fadeUp 0.9s 0.5s forwards;
   }
@@ -1393,7 +1394,7 @@
     <div class="olympics-goals">
       <div class="olympics-goal-item">
         <div class="olympics-goal-title">Qualification</div>
-        <div class="olympics-goal-text">Le cycle de qualification pour LA 2028 a déjà commencé. Avec son classement #2 mondial, François est en excellente position pour décrocher sa place.</div>
+        <div class="olympics-goal-text">Le cycle de qualification pour LA 2028 commence à l'été 2026. Avec son classement #2 mondial, François est en excellente position pour décrocher sa place.</div>
       </div>
       <div class="olympics-goal-item">
         <div class="olympics-goal-title">Objectif médaille</div>
@@ -1427,6 +1428,16 @@
       <div class="link-name">Judo Canada</div>
       <div class="link-desc">Fédération nationale · Actualités et résultats</div>
     </a>
+    <a href="https://www.instagram.com/francoisgauthierd" target="_blank" rel="noopener" class="link-card">
+      <span class="link-icon">📷</span>
+      <div class="link-name">Instagram</div>
+      <div class="link-desc">@francoisgauthierd · Suivre au quotidien</div>
+    </a>
+    <a href="https://www.facebook.com/search/top?q=Fran%C3%A7ois%20Gauthier%20Drapeau" target="_blank" rel="noopener" class="link-card">
+      <span class="link-icon">👥</span>
+      <div class="link-name">Facebook</div>
+      <div class="link-desc">François Gauthier Drapeau · Actualités et photos</div>
+    </a>
   </div>
 </section>
 
@@ -1453,7 +1464,7 @@
           <span class="pitch-value-icon">🏆</span>
           <div>
             <div class="pitch-value-title">Image d'excellence</div>
-            <div class="pitch-value-desc">Compétitionnant au plus haut niveau mondial, j'incarne l'excellence, la discipline et la constance — des valeurs qui rejaillissent sur vos partenaires.</div>
+            <div class="pitch-value-desc">Compétitionnant au plus haut niveau mondial, j'incarne l'excellence, la discipline et la constance — des valeurs qui rejaillissent sur les partenaires.</div>
           </div>
         </div>
         <div class="pitch-value-item">
@@ -1481,7 +1492,7 @@
           <span class="pitch-value-icon">🤝</span>
           <div>
             <div class="pitch-value-title">Représentation de marque</div>
-            <div class="pitch-value-desc">Intégration de vos partenaires dans des environnements de compétition, d'entraînement et de performance — un contexte fort et mémorable.</div>
+            <div class="pitch-value-desc">Intégration des partenaires dans des environnements de compétition, d'entraînement et de performance — un contexte fort et mémorable.</div>
           </div>
         </div>
       </div>
@@ -1519,7 +1530,7 @@
       </div>
     </div>
 
-    <p class="reveal" style="text-align:center; font-size:0.9rem; color:var(--gray); font-style:italic; margin-bottom:3rem;">Les services ci-dessus sont à titre d'exemple. Tout peut être adapté aux besoins et objectifs spécifiques du partenaire.</p>
+    <p class="reveal" style="text-align:center; font-size:1rem; color:var(--text-body); font-style:italic; margin-bottom:3rem; border: 1px solid rgba(212,175,55,0.2); padding: 1rem 2rem; display:inline-block; width:100%; background: rgba(212,175,55,0.04);">Les services ci-dessus sont à titre d'exemple. Tout peut être adapté aux besoins et objectifs spécifiques du partenaire.</p>
 
     <div class="sponsor-cta-block reveal">
       <p class="sponsor-cta-eyebrow">Créons de la valeur ensemble</p>
@@ -1546,7 +1557,7 @@
   </div>
 </footer>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+<script>
   // Banner close
   const banner = document.getElementById('sponsorBanner');
   const nav = document.getElementById('mainNav');
@@ -1555,7 +1566,7 @@
     nav.classList.add('no-banner');
   });
 
-  // Scroll reveal - content visible by default, animate on scroll
+  // Scroll reveal
   const reveals = document.querySelectorAll('.reveal');
   reveals.forEach(el => el.classList.add('hidden'));
   const observer = new IntersectionObserver((entries) => {
@@ -1568,11 +1579,22 @@
   }, { threshold: 0.08 });
   reveals.forEach(el => observer.observe(el));
 
-  // Countdown to LA 2028 (July 14, 2028)
-  const target = new Date('2028-07-14T00:00:00').getTime();
+  // Countdown to LA 2028 Opening Ceremony (July 14, 2028)
+  const cdTarget = new Date('2028-07-14T20:00:00').getTime();
   function updateCountdown() {
-    const diff = target - Date.now();
-    if (diff < 0) return;
-    document.getElementById('cd-days').textContent  = String(Math.floor(diff / 86400000)).padStart(3,'0');
-    document.getElementById('cd-hours').textContent = String(Math.floor((diff % 86400000) / 3600000)).padStart(2,'0');
-    document.getElementById('cd-mins').textContent  = String(Math.flo
+    const diff = cdTarget - Date.now();
+    if (diff < 0) {
+      document.getElementById('cd-days').textContent  = '000';
+      document.getElementById('cd-hours').textContent = '00';
+      document.getElementById('cd-mins').textContent  = '00';
+      document.getElementById('cd-secs').textContent  = '00';
+      return;
+    }
+    document.getElementById('cd-days').textContent  = String(Math.floor(diff / 86400000)).padStart(3, '0');
+    document.getElementById('cd-hours').textContent = String(Math.floor((diff % 86400000) / 3600000)).padStart(2, '0');
+    document.getElementById('cd-mins').textContent  = String(Math.floor((diff % 3600000) / 60000)).padStart(2, '0');
+    document.getElementById('cd-secs').textContent  = String(Math.floor((diff % 60000) / 1000)).padStart(2, '0');
+  }
+  updateCountdown();
+  setInterval(updateCountdown, 1000);
+</script>
