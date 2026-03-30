@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="fr" id="htmlRoot">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -29,6 +29,40 @@
     font-family: 'Cormorant Garamond', serif;
     overflow-x: hidden;
   }
+
+  /* ── LANGUAGE TOGGLE ── */
+  .lang-toggle {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    border: 1px solid rgba(255,255,255,0.15);
+    overflow: hidden;
+    flex-shrink: 0;
+  }
+  .lang-btn {
+    background: none;
+    border: none;
+    color: var(--gray);
+    font-family: 'Space Mono', monospace;
+    font-size: 0.55rem;
+    letter-spacing: 0.15em;
+    padding: 0.35rem 0.7rem;
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s;
+    text-transform: uppercase;
+  }
+  .lang-btn.active {
+    background: var(--gold);
+    color: #0a0a0a;
+    font-weight: 700;
+  }
+  .lang-btn:not(.active):hover { color: var(--white); }
+  .lang-divider { width: 1px; height: 100%; background: rgba(255,255,255,0.15); }
+
+  /* Hide/show language content */
+  [data-lang="en"] { display: none; }
+  html[lang="en"] [data-lang="en"] { display: revert; }
+  html[lang="en"] [data-lang="fr"] { display: none; }
 
   /* ── SPONSOR BANNER ── */
   .sponsor-banner {
@@ -78,6 +112,7 @@
     padding: 1.2rem 3rem;
     background: linear-gradient(to bottom, rgba(10,10,10,0.97), transparent);
     transition: top 0.3s;
+    gap: 1.5rem;
   }
   nav.no-banner { top: 0; }
   .nav-logo {
@@ -900,11 +935,14 @@
 
 <!-- SPONSOR BANNER -->
 <div class="sponsor-banner" id="sponsorBanner">
-  <strong>🤝 Opportunité de partenariat</strong>
+  <strong data-lang="fr">🤝 Opportunité de partenariat</strong>
+  <strong data-lang="en">🤝 Partnership Opportunity</strong>
   <div class="sponsor-banner-div"></div>
-  <span>Associez votre marque à un Olympien canadien</span>
+  <span data-lang="fr">Associez votre marque à un Olympien canadien</span>
+  <span data-lang="en">Associate your brand with a Canadian Olympian</span>
   <div class="sponsor-banner-div"></div>
-  <a href="#sponsorship" class="cta">Découvrir →</a>
+  <a href="#sponsorship" class="cta" data-lang="fr">Découvrir →</a>
+  <a href="#sponsorship" class="cta" data-lang="en">Learn more →</a>
   <button class="banner-close" id="closeBanner">✕</button>
 </div>
 
@@ -912,13 +950,18 @@
 <nav id="mainNav">
   <a href="#hero" class="nav-logo">FLAG<span>.</span></a>
   <ul class="nav-links">
-    <li><a href="#about">Biographie</a></li>
-    <li><a href="#palmares">Palmarès</a></li>
-    <li><a href="#stats">Statistiques</a></li>
-    <li><a href="#videos">Vidéos</a></li>
+    <li><a href="#about" data-lang="fr">Biographie</a><a href="#about" data-lang="en">Biography</a></li>
+    <li><a href="#palmares" data-lang="fr">Palmarès</a><a href="#palmares" data-lang="en">Results</a></li>
+    <li><a href="#stats" data-lang="fr">Statistiques</a><a href="#stats" data-lang="en">Statistics</a></li>
+    <li><a href="#videos" data-lang="fr">Vidéos</a><a href="#videos" data-lang="en">Videos</a></li>
     <li><a href="#olympics">LA 2028</a></li>
-    <li><a href="#sponsorship" class="gold">Partenariat</a></li>
+    <li><a href="#sponsorship" class="gold" data-lang="fr">Partenariat</a><a href="#sponsorship" class="gold" data-lang="en">Partnership</a></li>
   </ul>
+  <div class="lang-toggle">
+    <button class="lang-btn active" id="btnFr" onclick="setLang('fr')">FR</button>
+    <div class="lang-divider"></div>
+    <button class="lang-btn" id="btnEn" onclick="setLang('en')">EN</button>
+  </div>
 </nav>
 
 <!-- HERO -->
@@ -928,33 +971,40 @@
   <div class="hero-slash"></div>
 
   <div class="hero-content">
-    <p class="hero-eyebrow">🇨🇦 Judoka Canadien · –81 kg · Alma, Québec</p>
+    <p class="hero-eyebrow" data-lang="fr">🇨🇦 Judoka Canadien · –81 kg · Alma, Québec</p>
+    <p class="hero-eyebrow" data-lang="en">🇨🇦 Canadian Judoka · –81 kg · Alma, Québec</p>
     <h1 class="hero-name">
       François<br>
       <span class="red">Gauthier</span><br>
       Drapeau
     </h1>
-    <div class="hero-badge">Catégorie –81 kg · #2 Mondial 2025</div>
-    <p class="hero-tagline">L'élite du judo canadien. Olympien Paris 2024. Double champion Grand Slam 2025.</p>
+    <div class="hero-badge" data-lang="fr">Catégorie –81 kg · #2 Mondial 2025</div>
+    <div class="hero-badge" data-lang="en">–81 kg Category · #2 World Ranking 2025</div>
+    <p class="hero-tagline" data-lang="fr">L'élite du judo canadien. Olympien Paris 2024. Double champion Grand Slam 2025.</p>
+    <p class="hero-tagline" data-lang="en">Canada's judo elite. Paris 2024 Olympian. Two-time Grand Slam champion 2025.</p>
   </div>
 
   <div class="hero-stats-float">
     <div class="hero-stat-pill">
       <span class="hsp-num">11</span>
-      <span class="hsp-label">Médailles<br>Grand Slam</span>
+      <span class="hsp-label" data-lang="fr">Médailles<br>Grand Slam</span>
+      <span class="hsp-label" data-lang="en">Grand Slam<br>Medals</span>
     </div>
     <div class="hero-stat-pill">
       <span class="hsp-num">2</span>
-      <span class="hsp-label">Titres GS<br>2025</span>
+      <span class="hsp-label" data-lang="fr">Titres GS<br>2025</span>
+      <span class="hsp-label" data-lang="en">GS Titles<br>2025</span>
     </div>
     <div class="hero-stat-pill">
       <span class="hsp-num">#2</span>
-      <span class="hsp-label">Classement<br>mondial</span>
+      <span class="hsp-label" data-lang="fr">Classement<br>mondial</span>
+      <span class="hsp-label" data-lang="en">World<br>Ranking</span>
     </div>
   </div>
 
   <div class="scroll-ind">
-    <span>Défiler</span>
+    <span data-lang="fr">Défiler</span>
+    <span data-lang="en">Scroll</span>
     <div class="scroll-line"></div>
   </div>
 </section>
@@ -964,76 +1014,103 @@
   <div class="reveal">
     <div class="about-portrait-frame">
       <img src="14.jpg" alt="François Gauthier-Drapeau — Olympien Canada">
-      <div class="portrait-tag">Olympien Paris 2024</div>
+      <div class="portrait-tag" data-lang="fr">Olympien Paris 2024</div>
+      <div class="portrait-tag" data-lang="en">Paris 2024 Olympian</div>
     </div>
   </div>
 
   <div>
-    <span class="section-label reveal">Biographie</span>
-    <h2 class="section-title reveal">Une Étoile<br>Montante</h2>
-    <div class="about-bio reveal">
+    <span class="section-label reveal" data-lang="fr">Biographie</span>
+    <span class="section-label reveal" data-lang="en">Biography</span>
+    <h2 class="section-title reveal" data-lang="fr">Une Étoile<br>Montante</h2>
+    <h2 class="section-title reveal" data-lang="en">A Rising<br>Star</h2>
+    <div class="about-bio reveal" data-lang="fr">
       <p>Né le <strong>27 janvier 1998</strong> à <strong>Alma, au Lac-Saint-Jean</strong>, François Gauthier-Drapeau est aujourd'hui l'un des judokas les plus redoutables au monde. Représentant le Canada dans la catégorie des <em>moins de 81 kg</em>, il incarne la nouvelle génération du judo canadien — combatif, intelligent, et décisif sur le tatami.</p>
       <p>Son parcours vers le sommet n'a pas été sans obstacles. Une <strong>grave blessure au genou en 2018</strong>, suivie de l'arrêt forcé causé par la pandémie de COVID-19, l'ont éloigné de la compétition pendant plusieurs années. Mais François est revenu avec une détermination encore plus grande, transformant chaque épreuve en force.</p>
       <p>Dès son retour en 2021, il enchaîne les performances remarquables sur le circuit mondial IJF. En <strong>2025</strong>, il atteint le sommet : champion au Grand Slam de Paris, puis champion au Grand Slam d'Abu Dhabi — <em>deux titres dorés</em> qui confirment sa place parmi l'élite mondiale, avec un classement de <strong>#2 mondial</strong>.</p>
       <p>Diplômé en <strong>ingénierie</strong> et maintenant aux études en <strong>informatique</strong>, François s'entraîne à temps plein au <em>Stade olympique de Montréal</em> sous la direction d'Antoine Valois-Fortier, médaillé de bronze olympique 2012. Un duo maître-élève unique dans l'histoire du judo canadien.</p>
+    </div>
+    <div class="about-bio reveal" data-lang="en">
+      <p>Born on <strong>January 27, 1998</strong> in <strong>Alma, Lac-Saint-Jean</strong>, François Gauthier-Drapeau is today one of the most formidable judokas in the world. Competing for Canada in the <em>under-81 kg</em> category, he embodies the new generation of Canadian judo — fierce, intelligent, and decisive on the mat.</p>
+      <p>His path to the top was far from easy. A <strong>serious knee injury in 2018</strong>, followed by the forced pause of the COVID-19 pandemic, kept him away from competition for several years. But François came back with even greater determination, turning every setback into strength.</p>
+      <p>Since his return in 2021, he has strung together remarkable performances on the IJF World Tour. In <strong>2025</strong>, he reached the summit: Grand Slam champion in Paris, then Grand Slam champion in Abu Dhabi — <em>two gold titles</em> that cement his place among the world's elite, with a ranking of <strong>#2 worldwide</strong>.</p>
+      <p>A graduate in <strong>engineering</strong> and now pursuing studies in <strong>computer science</strong>, François trains full-time at the <em>Olympic Stadium in Montreal</em> under the guidance of Antoine Valois-Fortier, 2012 Olympic bronze medallist. A unique coach-athlete duo in Canadian judo history.</p>
     </div>
 
     <div class="about-values reveal">
       <div class="about-value-item">
         <span class="about-value-icon">⚔️</span>
         <div>
-          <div class="about-value-title">La Discipline</div>
-          <div class="about-value-desc">Chaque entraînement, chaque décision, chaque combat — une rigueur absolue sans compromis, au quotidien.</div>
+          <div class="about-value-title" data-lang="fr">La Discipline</div>
+          <div class="about-value-title" data-lang="en">Discipline</div>
+          <div class="about-value-desc" data-lang="fr">Chaque entraînement, chaque décision, chaque combat — une rigueur absolue sans compromis, au quotidien.</div>
+          <div class="about-value-desc" data-lang="en">Every training session, every decision, every match — absolute rigour with no compromise, every single day.</div>
         </div>
       </div>
       <div class="about-value-item">
         <span class="about-value-icon">🔥</span>
         <div>
-          <div class="about-value-title">La Persévérance</div>
-          <div class="about-value-desc">Revenu d'une blessure grave et d'une pandémie pour atteindre le #2 mondial. Rien ne peut l'arrêter.</div>
+          <div class="about-value-title" data-lang="fr">La Persévérance</div>
+          <div class="about-value-title" data-lang="en">Perseverance</div>
+          <div class="about-value-desc" data-lang="fr">Revenu d'une blessure grave et d'une pandémie pour atteindre le #2 mondial. Rien ne peut l'arrêter.</div>
+          <div class="about-value-desc" data-lang="en">Came back from a serious injury and a pandemic to reach #2 in the world. Nothing can stop him.</div>
         </div>
       </div>
       <div class="about-value-item">
         <span class="about-value-icon">💡</span>
         <div>
-          <div class="about-value-title">L'Intelligence</div>
-          <div class="about-value-desc">Ingénieur de formation, informaticien en devenir — un athlète aussi performant en dehors du tatami.</div>
+          <div class="about-value-title" data-lang="fr">L'Intelligence</div>
+          <div class="about-value-title" data-lang="en">Intelligence</div>
+          <div class="about-value-desc" data-lang="fr">Ingénieur de formation, informaticien en devenir — un athlète aussi performant en dehors du tatami.</div>
+          <div class="about-value-desc" data-lang="en">Trained engineer, aspiring computer scientist — an athlete who performs just as well off the mat.</div>
         </div>
       </div>
     </div>
 
     <div class="about-details reveal">
       <div class="about-detail">
-        <div class="about-detail-label">Date de naissance</div>
-        <div class="about-detail-value">27 janvier 1998</div>
+        <div class="about-detail-label" data-lang="fr">Date de naissance</div>
+        <div class="about-detail-label" data-lang="en">Date of Birth</div>
+        <div class="about-detail-value" data-lang="fr">27 janvier 1998</div>
+        <div class="about-detail-value" data-lang="en">January 27, 1998</div>
       </div>
       <div class="about-detail">
-        <div class="about-detail-label">Origine</div>
+        <div class="about-detail-label" data-lang="fr">Origine</div>
+        <div class="about-detail-label" data-lang="en">Hometown</div>
         <div class="about-detail-value">Alma, Lac-Saint-Jean, QC</div>
       </div>
       <div class="about-detail">
-        <div class="about-detail-label">Catégorie</div>
+        <div class="about-detail-label" data-lang="fr">Catégorie</div>
+        <div class="about-detail-label" data-lang="en">Weight Class</div>
         <div class="about-detail-value">–81 kg</div>
       </div>
       <div class="about-detail">
-        <div class="about-detail-label">Taille</div>
+        <div class="about-detail-label" data-lang="fr">Taille</div>
+        <div class="about-detail-label" data-lang="en">Height</div>
         <div class="about-detail-value">185 cm</div>
       </div>
       <div class="about-detail">
-        <div class="about-detail-label">Classement mondial</div>
-        <div class="about-detail-value">#2 mondial (2025)</div>
+        <div class="about-detail-label" data-lang="fr">Classement mondial</div>
+        <div class="about-detail-label" data-lang="en">World Ranking</div>
+        <div class="about-detail-value" data-lang="fr">#2 mondial (2025)</div>
+        <div class="about-detail-value" data-lang="en">#2 worldwide (2025)</div>
       </div>
       <div class="about-detail">
-        <div class="about-detail-label">Entraîneur</div>
+        <div class="about-detail-label" data-lang="fr">Entraîneur</div>
+        <div class="about-detail-label" data-lang="en">Coach</div>
         <div class="about-detail-value">Antoine Valois-Fortier</div>
       </div>
       <div class="about-detail">
-        <div class="about-detail-label">Base d'entraînement</div>
-        <div class="about-detail-value">Stade olympique, Montréal</div>
+        <div class="about-detail-label" data-lang="fr">Base d'entraînement</div>
+        <div class="about-detail-label" data-lang="en">Training Base</div>
+        <div class="about-detail-value" data-lang="fr">Stade olympique, Montréal</div>
+        <div class="about-detail-value" data-lang="en">Olympic Stadium, Montreal</div>
       </div>
       <div class="about-detail">
-        <div class="about-detail-label">Formation</div>
-        <div class="about-detail-value">Génie · Informatique</div>
+        <div class="about-detail-label" data-lang="fr">Formation</div>
+        <div class="about-detail-label" data-lang="en">Education</div>
+        <div class="about-detail-value" data-lang="fr">Génie · Informatique</div>
+        <div class="about-detail-value" data-lang="en">Engineering · Computer Science</div>
       </div>
     </div>
   </div>
@@ -1042,81 +1119,100 @@
 <!-- PALMARES -->
 <section id="palmares">
   <div class="palmares-header reveal">
-    <span class="section-label">Palmarès</span>
-    <h2 class="section-title">Médailles &<br>Victoires</h2>
-    <p style="font-size:1.1rem; color:var(--text-body); font-style:italic; margin-top:1rem; max-width:600px; margin-left:auto; margin-right:auto;">11 médailles sur le circuit mondial IJF — dont deux titres en or en 2025. Une progression qui place François parmi les meilleurs au monde.</p>
+    <span class="section-label" data-lang="fr">Palmarès</span>
+    <span class="section-label" data-lang="en">Results</span>
+    <h2 class="section-title" data-lang="fr">Médailles &<br>Victoires</h2>
+    <h2 class="section-title" data-lang="en">Medals &<br>Victories</h2>
+    <p style="font-size:1.1rem; color:var(--text-body); font-style:italic; margin-top:1rem; max-width:600px; margin-left:auto; margin-right:auto;" data-lang="fr">11 médailles sur le circuit mondial IJF — dont deux titres en or en 2025. Une progression qui place François parmi les meilleurs au monde.</p>
+    <p style="font-size:1.1rem; color:var(--text-body); font-style:italic; margin-top:1rem; max-width:600px; margin-left:auto; margin-right:auto;" data-lang="en">11 medals on the IJF World Tour — including two gold titles in 2025. A trajectory that places François among the world's best.</p>
   </div>
 
   <div class="medals-grid">
     <div class="medal-card medal-gold reveal">
       <span class="medal-icon">🥇</span>
-      <div class="medal-event">Grand Slam IJF</div>
+      <div class="medal-event" data-lang="fr">Grand Slam IJF</div>
+      <div class="medal-event" data-lang="en">IJF Grand Slam</div>
       <div class="medal-name">Grand Slam Paris</div>
       <div class="medal-year">2025 · –81 kg</div>
     </div>
     <div class="medal-card medal-gold reveal">
       <span class="medal-icon">🥇</span>
-      <div class="medal-event">Grand Slam IJF</div>
+      <div class="medal-event" data-lang="fr">Grand Slam IJF</div>
+      <div class="medal-event" data-lang="en">IJF Grand Slam</div>
       <div class="medal-name">Grand Slam Abu Dhabi</div>
       <div class="medal-year">2025 · –81 kg</div>
     </div>
     <div class="medal-card medal-gold reveal">
       <span class="medal-icon">🥇</span>
-      <div class="medal-event">Championnats panaméricains</div>
+      <div class="medal-event" data-lang="fr">Championnats panaméricains</div>
+      <div class="medal-event" data-lang="en">Pan American Championships</div>
       <div class="medal-name">Pan Am Championships</div>
       <div class="medal-year">2023 · –81 kg</div>
     </div>
     <div class="medal-card medal-gold reveal">
       <span class="medal-icon">🥇</span>
-      <div class="medal-event">Open panaméricain</div>
+      <div class="medal-event" data-lang="fr">Open panaméricain</div>
+      <div class="medal-event" data-lang="en">Pan American Open</div>
       <div class="medal-name">Pan American Open Montréal</div>
       <div class="medal-year">2025 · –90 kg</div>
     </div>
     <div class="medal-card medal-silver reveal">
       <span class="medal-icon">🥈</span>
-      <div class="medal-event">Grand Slam IJF</div>
+      <div class="medal-event" data-lang="fr">Grand Slam IJF</div>
+      <div class="medal-event" data-lang="en">IJF Grand Slam</div>
       <div class="medal-name">Grand Slam Antalya</div>
-      <div class="medal-year">2024 · Finale vs Nagase (JPN)</div>
+      <div class="medal-year" data-lang="fr">2024 · Finale vs Nagase (JPN)</div>
+      <div class="medal-year" data-lang="en">2024 · Final vs Nagase (JPN)</div>
     </div>
     <div class="medal-card medal-silver reveal">
       <span class="medal-icon">🥈</span>
-      <div class="medal-event">Grand Slam IJF</div>
-      <div class="medal-name">Grand Slam Bakou</div>
+      <div class="medal-event" data-lang="fr">Grand Slam IJF</div>
+      <div class="medal-event" data-lang="en">IJF Grand Slam</div>
+      <div class="medal-name" data-lang="fr">Grand Slam Bakou</div>
+      <div class="medal-name" data-lang="en">Grand Slam Baku</div>
       <div class="medal-year">2025 · –81 kg</div>
     </div>
     <div class="medal-card medal-silver reveal">
       <span class="medal-icon">🥈</span>
-      <div class="medal-event">Jeux du Commonwealth</div>
+      <div class="medal-event" data-lang="fr">Jeux du Commonwealth</div>
+      <div class="medal-event" data-lang="en">Commonwealth Games</div>
       <div class="medal-name">Commonwealth Games</div>
       <div class="medal-year">2022 · Birmingham</div>
     </div>
     <div class="medal-card medal-silver reveal">
       <span class="medal-icon">🥈</span>
-      <div class="medal-event">Championnats panaméricains</div>
+      <div class="medal-event" data-lang="fr">Championnats panaméricains</div>
+      <div class="medal-event" data-lang="en">Pan American Championships</div>
       <div class="medal-name">Pan Am Championships</div>
       <div class="medal-year">2024 · –81 kg</div>
     </div>
     <div class="medal-card medal-bronze reveal">
       <span class="medal-icon">🥉</span>
-      <div class="medal-event">Grand Slam IJF</div>
-      <div class="medal-name">Grand Slam Bakou</div>
-      <div class="medal-year">2021 · Première médaille GS</div>
+      <div class="medal-event" data-lang="fr">Grand Slam IJF</div>
+      <div class="medal-event" data-lang="en">IJF Grand Slam</div>
+      <div class="medal-name" data-lang="fr">Grand Slam Bakou</div>
+      <div class="medal-name" data-lang="en">Grand Slam Baku</div>
+      <div class="medal-year" data-lang="fr">2021 · Première médaille GS</div>
+      <div class="medal-year" data-lang="en">2021 · First GS medal</div>
     </div>
     <div class="medal-card medal-bronze reveal">
       <span class="medal-icon">🥉</span>
-      <div class="medal-event">Grand Slam IJF</div>
+      <div class="medal-event" data-lang="fr">Grand Slam IJF</div>
+      <div class="medal-event" data-lang="en">IJF Grand Slam</div>
       <div class="medal-name">Grand Slam Tel Aviv</div>
       <div class="medal-year">2022 & 2023 · ×2 bronzes</div>
     </div>
     <div class="medal-card medal-bronze reveal">
       <span class="medal-icon">🥉</span>
-      <div class="medal-event">Grand Slam IJF</div>
+      <div class="medal-event" data-lang="fr">Grand Slam IJF</div>
+      <div class="medal-event" data-lang="en">IJF Grand Slam</div>
       <div class="medal-name">Grand Slam Paris</div>
       <div class="medal-year">2023 & 2024 · ×2 bronzes</div>
     </div>
     <div class="medal-card medal-bronze reveal">
       <span class="medal-icon">🥉</span>
-      <div class="medal-event">Grand Slam IJF</div>
+      <div class="medal-event" data-lang="fr">Grand Slam IJF</div>
+      <div class="medal-event" data-lang="en">IJF Grand Slam</div>
       <div class="medal-name">Grand Slam Tokyo</div>
       <div class="medal-year">2024 · –81 kg</div>
     </div>
@@ -1125,11 +1221,13 @@
   <div class="photo-strip reveal">
     <div class="photo-strip-item">
       <img src="17.jpg" alt="François Gauthier-Drapeau — Victoire Grand Slam Paris 2025">
-      <div class="photo-strip-caption">Victoire · Grand Slam Paris 2025 🥇</div>
+      <div class="photo-strip-caption" data-lang="fr">Victoire · Grand Slam Paris 2025 🥇</div>
+      <div class="photo-strip-caption" data-lang="en">Victory · Grand Slam Paris 2025 🥇</div>
     </div>
     <div class="photo-strip-item">
       <img src="15.jpg" alt="François Gauthier-Drapeau — Action Grand Slam Antalya">
-      <div class="photo-strip-caption">En action · Grand Slam Antalya</div>
+      <div class="photo-strip-caption" data-lang="fr">En action · Grand Slam Antalya</div>
+      <div class="photo-strip-caption" data-lang="en">In action · Grand Slam Antalya</div>
     </div>
     <div class="photo-strip-item">
       <img src="16.jpg" alt="François Gauthier-Drapeau — Projection Grand Slam Paris">
@@ -1140,54 +1238,72 @@
   <div class="photo-strip reveal" style="margin-top:1rem;">
     <div class="photo-strip-item">
       <img src="13.jpg" alt="François Gauthier-Drapeau — Médaille podium Paris">
-      <div class="photo-strip-caption">Podium · Grand Slam Paris · Médaille 🏅</div>
+      <div class="photo-strip-caption" data-lang="fr">Podium · Grand Slam Paris · Médaille 🏅</div>
+      <div class="photo-strip-caption" data-lang="en">Podium · Grand Slam Paris · Medal 🏅</div>
     </div>
     <div class="photo-strip-item">
       <img src="18.jpg" alt="François Gauthier-Drapeau — Podium officiel Grand Slam Paris 2025">
-      <div class="photo-strip-caption">Cérémonie officielle · Grand Slam Paris 2025</div>
+      <div class="photo-strip-caption" data-lang="fr">Cérémonie officielle · Grand Slam Paris 2025</div>
+      <div class="photo-strip-caption" data-lang="en">Official ceremony · Grand Slam Paris 2025</div>
     </div>
     <div class="photo-strip-item">
       <img src="6.jpg" alt="François Gauthier-Drapeau — Abu Dhabi Grand Slam">
-      <div class="photo-strip-caption">En action · Grand Slam Abu Dhabi 🥇</div>
+      <div class="photo-strip-caption" data-lang="fr">En action · Grand Slam Abu Dhabi 🥇</div>
+      <div class="photo-strip-caption" data-lang="en">In action · Grand Slam Abu Dhabi 🥇</div>
     </div>
   </div>
 
-  <div class="timeline-title reveal">Chronologie de carrière</div>
+  <div class="timeline-title reveal" data-lang="fr">Chronologie de carrière</div>
+  <div class="timeline-title reveal" data-lang="en">Career Timeline</div>
   <div class="timeline reveal">
     <div class="timeline-item">
       <div class="t-year">2016</div>
-      <div class="t-event">Premiers pas sur la scène internationale</div>
-      <div class="t-detail">Bronze aux Championnats panaméricains juniors à Buenos Aires · –73 kg</div>
+      <div class="t-event" data-lang="fr">Premiers pas sur la scène internationale</div>
+      <div class="t-event" data-lang="en">First steps on the international stage</div>
+      <div class="t-detail" data-lang="fr">Bronze aux Championnats panaméricains juniors à Buenos Aires · –73 kg</div>
+      <div class="t-detail" data-lang="en">Bronze at Pan American Junior Championships in Buenos Aires · –73 kg</div>
     </div>
     <div class="timeline-item">
       <div class="t-year">2018</div>
-      <div class="t-event">Blessure grave au genou</div>
-      <div class="t-detail">Interruption forcée de carrière — il reviendra plus fort que jamais</div>
+      <div class="t-event" data-lang="fr">Blessure grave au genou</div>
+      <div class="t-event" data-lang="en">Serious knee injury</div>
+      <div class="t-detail" data-lang="fr">Interruption forcée de carrière — il reviendra plus fort que jamais</div>
+      <div class="t-detail" data-lang="en">Forced career interruption — he would come back stronger than ever</div>
     </div>
     <div class="timeline-item">
       <div class="t-year">2021</div>
-      <div class="t-event">Retour sur le circuit mondial IJF</div>
-      <div class="t-detail">Première médaille Grand Slam à Bakou 🥉 · Passe en catégorie –81 kg</div>
+      <div class="t-event" data-lang="fr">Retour sur le circuit mondial IJF</div>
+      <div class="t-event" data-lang="en">Return to the IJF World Tour</div>
+      <div class="t-detail" data-lang="fr">Première médaille Grand Slam à Bakou 🥉 · Passe en catégorie –81 kg</div>
+      <div class="t-detail" data-lang="en">First Grand Slam medal in Baku 🥉 · Moves up to –81 kg category</div>
     </div>
     <div class="timeline-item">
       <div class="t-year">2022</div>
-      <div class="t-event">Confirmation internationale</div>
-      <div class="t-detail">Bronze Grand Slam Tel Aviv · Argent Jeux du Commonwealth (Birmingham) · 4 podiums en circuit IJF</div>
+      <div class="t-event" data-lang="fr">Confirmation internationale</div>
+      <div class="t-event" data-lang="en">International breakthrough</div>
+      <div class="t-detail" data-lang="fr">Bronze Grand Slam Tel Aviv · Argent Jeux du Commonwealth (Birmingham) · 4 podiums en circuit IJF</div>
+      <div class="t-detail" data-lang="en">Bronze Grand Slam Tel Aviv · Silver Commonwealth Games (Birmingham) · 4 IJF podiums</div>
     </div>
     <div class="timeline-item">
       <div class="t-year">2023</div>
-      <div class="t-event">Consécration panaméricaine & top 5 mondial</div>
-      <div class="t-detail">Champion panaméricain 🥇 · 5e aux Championnats du monde de Doha · 3 podiums Grand Slam</div>
+      <div class="t-event" data-lang="fr">Consécration panaméricaine & top 5 mondial</div>
+      <div class="t-event" data-lang="en">Pan American title & top 5 world ranking</div>
+      <div class="t-detail" data-lang="fr">Champion panaméricain 🥇 · 5e aux Championnats du monde de Doha · 3 podiums Grand Slam</div>
+      <div class="t-detail" data-lang="en">Pan American champion 🥇 · 5th at World Championships in Doha · 3 Grand Slam podiums</div>
     </div>
     <div class="timeline-item">
       <div class="t-year">2024</div>
-      <div class="t-event">Première finale Grand Slam & Jeux Olympiques</div>
-      <div class="t-detail">Argent Antalya (finale vs Nagase, champion olympique) · Olympien à Paris · Bronze Tokyo</div>
+      <div class="t-event" data-lang="fr">Première finale Grand Slam & Jeux Olympiques</div>
+      <div class="t-event" data-lang="en">First Grand Slam final & Olympic Games</div>
+      <div class="t-detail" data-lang="fr">Argent Antalya (finale vs Nagase, champion olympique) · Olympien à Paris · Bronze Tokyo</div>
+      <div class="t-detail" data-lang="en">Silver Antalya (final vs Nagase, Olympic champion) · Olympian in Paris · Bronze Tokyo</div>
     </div>
     <div class="timeline-item major">
       <div class="t-year">2025</div>
-      <div class="t-event">Année de tous les records 🏆</div>
-      <div class="t-detail">Champion Grand Slam Paris · Champion Grand Slam Abu Dhabi · Argent Bakou · #2 mondial · 11e médaille en circuit IJF</div>
+      <div class="t-event" data-lang="fr">Année de tous les records 🏆</div>
+      <div class="t-event" data-lang="en">Record-breaking year 🏆</div>
+      <div class="t-detail" data-lang="fr">Champion Grand Slam Paris · Champion Grand Slam Abu Dhabi · Argent Bakou · #2 mondial · 11e médaille en circuit IJF</div>
+      <div class="t-detail" data-lang="en">Grand Slam Paris champion · Grand Slam Abu Dhabi champion · Silver Baku · #2 world ranking · 11th IJF circuit medal</div>
     </div>
   </div>
 </section>
@@ -1195,39 +1311,51 @@
 <!-- STATS -->
 <section id="stats">
   <div style="text-align:center;" class="reveal">
-    <span class="section-label" style="color:rgba(255,255,255,0.6);">Statistiques</span>
-    <h2 class="section-title">Les chiffres<br>parlent</h2>
+    <span class="section-label" style="color:rgba(255,255,255,0.6);" data-lang="fr">Statistiques</span>
+    <span class="section-label" style="color:rgba(255,255,255,0.6);" data-lang="en">Statistics</span>
+    <h2 class="section-title" data-lang="fr">Les chiffres<br>parlent</h2>
+    <h2 class="section-title" data-lang="en">The numbers<br>speak</h2>
   </div>
   <div class="stats-grid reveal">
     <div class="stat-item">
       <span class="stat-number">11</span>
-      <div class="stat-label">Médailles Grand Slam IJF</div>
+      <div class="stat-label" data-lang="fr">Médailles Grand Slam IJF</div>
+      <div class="stat-label" data-lang="en">IJF Grand Slam Medals</div>
     </div>
     <div class="stat-item">
       <span class="stat-number">4<span class="stat-unit">×🥇</span></span>
-      <div class="stat-label">Titres internationaux</div>
+      <div class="stat-label" data-lang="fr">Titres internationaux</div>
+      <div class="stat-label" data-lang="en">International Titles</div>
     </div>
     <div class="stat-item">
       <span class="stat-number">#2</span>
-      <div class="stat-label">Classement mondial 2025</div>
+      <div class="stat-label" data-lang="fr">Classement mondial 2025</div>
+      <div class="stat-label" data-lang="en">World Ranking 2025</div>
     </div>
     <div class="stat-item">
       <span class="stat-number">185<span class="stat-unit">cm</span></span>
-      <div class="stat-label">Taille · –81 kg</div>
+      <div class="stat-label" data-lang="fr">Taille · –81 kg</div>
+      <div class="stat-label" data-lang="en">Height · –81 kg</div>
     </div>
   </div>
   <div class="stats-context reveal">
     <div class="stats-context-item">
-      <div class="stats-context-title">Circuit IJF 2025</div>
-      <div class="stats-context-text">En 2025, François a dominé le circuit mondial avec deux titres Grand Slam (Paris + Abu Dhabi), une médaille d'argent à Bakou, et une victoire à l'Open panaméricain de Montréal. Sa régularité est remarquable.</div>
+      <div class="stats-context-title" data-lang="fr">Circuit IJF 2025</div>
+      <div class="stats-context-title" data-lang="en">IJF Tour 2025</div>
+      <div class="stats-context-text" data-lang="fr">En 2025, François a dominé le circuit mondial avec deux titres Grand Slam (Paris + Abu Dhabi), une médaille d'argent à Bakou, et une victoire à l'Open panaméricain de Montréal. Sa régularité est remarquable.</div>
+      <div class="stats-context-text" data-lang="en">In 2025, François dominated the world circuit with two Grand Slam titles (Paris + Abu Dhabi), a silver medal in Baku, and a win at the Pan American Open in Montreal. His consistency is remarkable.</div>
     </div>
     <div class="stats-context-item">
-      <div class="stats-context-title">Retour de blessure</div>
-      <div class="stats-context-text">Après une longue absence due à une blessure au genou et la pandémie, François a totalement transformé son judo au retour — passant de la catégorie –73 kg à –81 kg et devenant immédiatement compétitif au plus haut niveau.</div>
+      <div class="stats-context-title" data-lang="fr">Retour de blessure</div>
+      <div class="stats-context-title" data-lang="en">Comeback from Injury</div>
+      <div class="stats-context-text" data-lang="fr">Après une longue absence due à une blessure au genou et la pandémie, François a totalement transformé son judo au retour — passant de la catégorie –73 kg à –81 kg et devenant immédiatement compétitif au plus haut niveau.</div>
+      <div class="stats-context-text" data-lang="en">After a long absence due to a knee injury and the pandemic, François completely reinvented his judo on his return — moving from –73 kg to –81 kg and becoming immediately competitive at the highest level.</div>
     </div>
     <div class="stats-context-item">
-      <div class="stats-context-title">Athlète complet</div>
-      <div class="stats-context-text">Diplômé en génie, maintenant aux études en informatique, François représente une nouvelle génération d'athlètes : performants sur le tatami, ambitieux et rigoureux dans la vie. Un ambassadeur idéal pour des marques d'envergure.</div>
+      <div class="stats-context-title" data-lang="fr">Athlète complet</div>
+      <div class="stats-context-title" data-lang="en">Complete Athlete</div>
+      <div class="stats-context-text" data-lang="fr">Diplômé en génie, maintenant aux études en informatique, François représente une nouvelle génération d'athlètes : performants sur le tatami, ambitieux et rigoureux dans la vie. Un ambassadeur idéal pour des marques d'envergure.</div>
+      <div class="stats-context-text" data-lang="en">With an engineering degree and now studying computer science, François represents a new generation of athletes: high-performing on the mat, ambitious and disciplined in life. An ideal ambassador for ambitious brands.</div>
     </div>
   </div>
 </section>
@@ -1239,25 +1367,29 @@
   <div style="position:absolute; inset:0; background:linear-gradient(to right, rgba(10,10,10,0.7) 0%, transparent 50%, rgba(10,10,10,0.5) 100%);"></div>
   <div style="position:absolute; bottom:3rem; left:4rem;">
     <p style="font-family:'Space Mono',monospace; font-size:0.65rem; letter-spacing:0.3em; color:var(--gold); text-transform:uppercase; margin-bottom:0.5rem;">Grand Slam Paris · Février 2025</p>
-    <p style="font-family:'Bebas Neue',sans-serif; font-size:clamp(2rem,5vw,4.5rem); color:var(--white); line-height:1; letter-spacing:0.04em;">Champion.<br>Pour la première fois à Paris.</p>
+    <p style="font-family:'Bebas Neue',sans-serif; font-size:clamp(2rem,5vw,4.5rem); color:var(--white); line-height:1; letter-spacing:0.04em;" data-lang="fr">Champion.<br>Pour la première fois à Paris.</p>
+    <p style="font-family:'Bebas Neue',sans-serif; font-size:clamp(2rem,5vw,4.5rem); color:var(--white); line-height:1; letter-spacing:0.04em;" data-lang="en">Champion.<br>For the first time in Paris.</p>
   </div>
 </div>
 
 <!-- QUOTE -->
 <section id="quote">
   <blockquote>
-    <p class="quote-text">"Dans la finale, j'ai vraiment fait du bon judo. Mes techniques ont bien fonctionné et j'ai accumulé des points rapidement. J'avais été nerveux face à un adversaire aussi fort, mais j'ai géré la pression jusqu'au bout."</p>
-    <cite class="quote-attr">— François Gauthier-Drapeau <span>· Grand Slam Abu Dhabi, novembre 2025</span></cite>
+    <p class="quote-text" data-lang="fr">"Dans la finale, j'ai vraiment fait du bon judo. Mes techniques ont bien fonctionné et j'ai accumulé des points rapidement. J'avais été nerveux face à un adversaire aussi fort, mais j'ai géré la pression jusqu'au bout."</p>
+    <p class="quote-text" data-lang="en">"In the final, I really did some good judo. My techniques worked well and I racked up points quickly. I had been nervous facing such a tough opponent, but I managed the pressure all the way through."</p>
+    <cite class="quote-attr">— François Gauthier-Drapeau <span data-lang="fr">· Grand Slam Abu Dhabi, novembre 2025</span><span data-lang="en">· Grand Slam Abu Dhabi, November 2025</span></cite>
   </blockquote>
 </section>
 
 <section id="videos">
-  <span class="section-label">Vidéos</span>
-  <h2 class="section-title">En action<br>sur le tatami</h2>
-  <p class="videos-intro">Revivez les meilleurs moments de François Gauthier-Drapeau sur le circuit mondial IJF — des combats intenses, des techniques spectaculaires, et des victoires mémorables.</p>
+  <span class="section-label" data-lang="fr">Vidéos</span>
+  <span class="section-label" data-lang="en">Videos</span>
+  <h2 class="section-title" data-lang="fr">En action<br>sur le tatami</h2>
+  <h2 class="section-title" data-lang="en">In action<br>on the mat</h2>
+  <p class="videos-intro" data-lang="fr">Revivez les meilleurs moments de François Gauthier-Drapeau sur le circuit mondial IJF — des combats intenses, des techniques spectaculaires, et des victoires mémorables.</p>
+  <p class="videos-intro" data-lang="en">Relive the best moments of François Gauthier-Drapeau on the IJF World Tour — intense battles, spectacular techniques, and memorable victories.</p>
 
   <div class="videos-grid">
-
     <a href="https://www.youtube.com/results?search_query=Gauthier+Drapeau+judo+Paris+2025" target="_blank" rel="noopener" style="text-decoration:none; color:inherit;">
       <div class="video-card">
         <div class="video-thumb">
@@ -1270,11 +1402,11 @@
         </div>
         <div class="video-info">
           <div class="video-tag">Grand Slam · Paris 2025</div>
-          <div class="video-title">François Gauthier-Drapeau — Champion à Paris 🥇</div>
+          <div class="video-title" data-lang="fr">François Gauthier-Drapeau — Champion à Paris 🥇</div>
+          <div class="video-title" data-lang="en">François Gauthier-Drapeau — Champion in Paris 🥇</div>
         </div>
       </div>
     </a>
-
     <a href="https://www.youtube.com/results?search_query=Gauthier+Drapeau+judo+Abu+Dhabi+2025" target="_blank" rel="noopener" style="text-decoration:none; color:inherit;">
       <div class="video-card">
         <div class="video-thumb">
@@ -1287,11 +1419,11 @@
         </div>
         <div class="video-info">
           <div class="video-tag">Grand Slam · Abu Dhabi 2025</div>
-          <div class="video-title">François Gauthier-Drapeau — Champion à Abu Dhabi 🥇</div>
+          <div class="video-title" data-lang="fr">François Gauthier-Drapeau — Champion à Abu Dhabi 🥇</div>
+          <div class="video-title" data-lang="en">François Gauthier-Drapeau — Champion in Abu Dhabi 🥇</div>
         </div>
       </div>
     </a>
-
     <a href="https://www.youtube.com/results?search_query=Gauthier+Drapeau+judo+Antalya+2024+Nagase" target="_blank" rel="noopener" style="text-decoration:none; color:inherit;">
       <div class="video-card">
         <div class="video-thumb">
@@ -1304,11 +1436,11 @@
         </div>
         <div class="video-info">
           <div class="video-tag">Grand Slam · Antalya 2024</div>
-          <div class="video-title">Finale face à Nagase — Argent historique 🥈</div>
+          <div class="video-title" data-lang="fr">Finale face à Nagase — Argent historique 🥈</div>
+          <div class="video-title" data-lang="en">Final vs Nagase — Historic Silver 🥈</div>
         </div>
       </div>
     </a>
-
     <a href="https://www.youtube.com/results?search_query=Gauthier+Drapeau+judo+olympiques+Paris+2024" target="_blank" rel="noopener" style="text-decoration:none; color:inherit;">
       <div class="video-card">
         <div class="video-thumb">
@@ -1320,12 +1452,13 @@
           </div>
         </div>
         <div class="video-info">
-          <div class="video-tag">Jeux Olympiques · Paris 2024</div>
-          <div class="video-title">François aux Jeux de Paris — Équipe Canada</div>
+          <div class="video-tag" data-lang="fr">Jeux Olympiques · Paris 2024</div>
+          <div class="video-tag" data-lang="en">Olympic Games · Paris 2024</div>
+          <div class="video-title" data-lang="fr">François aux Jeux de Paris — Équipe Canada</div>
+          <div class="video-title" data-lang="en">François at the Paris Games — Team Canada</div>
         </div>
       </div>
     </a>
-
   </div>
 
   <div style="text-align:center; margin-top:2.5rem;">
@@ -1333,7 +1466,8 @@
        style="display:inline-block; padding:1rem 2.5rem; border:1px solid var(--red); color:var(--red); font-family:'Space Mono',monospace; font-size:0.65rem; letter-spacing:0.2em; text-transform:uppercase; text-decoration:none; transition:background 0.3s, color 0.3s;"
        onmouseover="this.style.background='var(--red)'; this.style.color='white';"
        onmouseout="this.style.background='transparent'; this.style.color='var(--red)';">
-      Voir plus sur YouTube →
+      <span data-lang="fr">Voir plus sur YouTube →</span>
+      <span data-lang="en">Watch more on YouTube →</span>
     </a>
   </div>
 </section>  
@@ -1344,17 +1478,24 @@
     <div class="coach-img-inner">
       <img src="1.jpg" alt="François Gauthier-Drapeau à l'entraînement">
     </div>
-    <div class="coach-label-tag">Entraîneur national</div>
+    <div class="coach-label-tag" data-lang="fr">Entraîneur national</div>
+    <div class="coach-label-tag" data-lang="en">National Coach</div>
   </div>
   <div class="reveal">
-    <span class="section-label">L'homme derrière le champion</span>
+    <span class="section-label" data-lang="fr">L'homme derrière le champion</span>
+    <span class="section-label" data-lang="en">The man behind the champion</span>
     <div class="coach-name-big">Antoine <span>Valois-Fortier</span></div>
-    <p class="coach-text">Il y a quelque chose de rare et de beau dans ce duo. <strong>Antoine Valois-Fortier</strong>, médaillé de bronze aux Jeux olympiques de Londres 2012 dans cette même catégorie des –81 kg, est aujourd'hui l'entraîneur de François Gauthier-Drapeau.</p>
-    <p class="coach-text">Celui qui était autrefois le grand espoir du judo canadien transmet maintenant son savoir à son successeur naturel. Cette continuité unique permet à François de bénéficier d'une expertise de première main sur ce que ça prend pour performer aux Jeux Olympiques — le vécu d'un champion qui connaît chaque détail du chemin.</p>
-    <p class="coach-text">Ensemble, ils partagent le même objectif : <strong>une médaille olympique à Los Angeles en 2028</strong>. Valois-Fortier connaît le niveau requis. François, lui, a maintenant le talent et la maturité pour y arriver.</p>
+    <p class="coach-text" data-lang="fr">Il y a quelque chose de rare et de beau dans ce duo. <strong>Antoine Valois-Fortier</strong>, médaillé de bronze aux Jeux olympiques de Londres 2012 dans cette même catégorie des –81 kg, est aujourd'hui l'entraîneur de François Gauthier-Drapeau.</p>
+    <p class="coach-text" data-lang="en">There is something rare and beautiful about this duo. <strong>Antoine Valois-Fortier</strong>, bronze medallist at the 2012 London Olympics in this very same –81 kg category, is today François Gauthier-Drapeau's coach.</p>
+    <p class="coach-text" data-lang="fr">Celui qui était autrefois le grand espoir du judo canadien transmet maintenant son savoir à son successeur naturel. Cette continuité unique permet à François de bénéficier d'une expertise de première main sur ce que ça prend pour performer aux Jeux Olympiques — le vécu d'un champion qui connaît chaque détail du chemin.</p>
+    <p class="coach-text" data-lang="en">The man who was once the great hope of Canadian judo is now passing on his knowledge to his natural successor. This unique continuity gives François first-hand expertise on what it takes to perform at the Olympics — the lived experience of a champion who knows every detail of the path.</p>
+    <p class="coach-text" data-lang="fr">Ensemble, ils partagent le même objectif : <strong>une médaille olympique à Los Angeles en 2028</strong>. Valois-Fortier connaît le niveau requis. François, lui, a maintenant le talent et la maturité pour y arriver.</p>
+    <p class="coach-text" data-lang="en">Together, they share the same goal: <strong>an Olympic medal in Los Angeles in 2028</strong>. Valois-Fortier knows what it takes. François now has the talent and maturity to get there.</p>
     <div class="coach-quote">
-      <em>"Je n'ai aucun doute que lorsque l'enjeu sera plus élevé, François va gagner ce combat. Il avait quatre bonnes victoires et a dominé tous ses adversaires."</em>
-      <cite>— Antoine Valois-Fortier, après la finale d'Antalya 2024</cite>
+      <em data-lang="fr">"Je n'ai aucun doute que lorsque l'enjeu sera plus élevé, François va gagner ce combat. Il avait quatre bonnes victoires et a dominé tous ses adversaires."</em>
+      <em data-lang="en">"I have no doubt that when the stakes are higher, François will win that fight. He had four strong victories and dominated all of his opponents."</em>
+      <cite data-lang="fr">— Antoine Valois-Fortier, après la finale d'Antalya 2024</cite>
+      <cite data-lang="en">— Antoine Valois-Fortier, after the Antalya 2024 final</cite>
     </div>
   </div>
 </section>
@@ -1366,43 +1507,58 @@
   <div class="olympics-content reveal">
     <span class="olympics-flag">🌟</span>
     <span class="olympics-year">2028</span>
-    <p class="olympics-sub">Los Angeles · Jeux Olympiques d'été</p>
-    <p class="olympics-text">
+    <p class="olympics-sub" data-lang="fr">Los Angeles · Jeux Olympiques d'été</p>
+    <p class="olympics-sub" data-lang="en">Los Angeles · Summer Olympic Games</p>
+    <p class="olympics-text" data-lang="fr">
       Après avoir représenté fièrement le Canada aux <strong>Jeux de Paris 2024</strong>, François Gauthier-Drapeau a maintenant les yeux rivés sur Los Angeles. À 27 ans, classé <strong>#2 mondial</strong> avec deux titres Grand Slam en 2025, il aborde ce nouveau cycle olympique en position de force — et avec la faim d'un athlète qui sait exactement ce qu'il veut accomplir.
+    </p>
+    <p class="olympics-text" data-lang="en">
+      Having proudly represented Canada at the <strong>Paris 2024 Games</strong>, François Gauthier-Drapeau now has his sights set on Los Angeles. At 27 years old, ranked <strong>#2 in the world</strong> with two Grand Slam titles in 2025, he enters this new Olympic cycle from a position of strength — with the hunger of an athlete who knows exactly what he wants to achieve.
     </p>
 
     <div class="countdown-wrap">
       <div class="countdown-item">
         <span class="countdown-num" id="cd-days">—</span>
-        <div class="countdown-lbl">Jours</div>
+        <div class="countdown-lbl" data-lang="fr">Jours</div>
+        <div class="countdown-lbl" data-lang="en">Days</div>
       </div>
       <div class="countdown-item">
         <span class="countdown-num" id="cd-hours">—</span>
-        <div class="countdown-lbl">Heures</div>
+        <div class="countdown-lbl" data-lang="fr">Heures</div>
+        <div class="countdown-lbl" data-lang="en">Hours</div>
       </div>
       <div class="countdown-item">
         <span class="countdown-num" id="cd-mins">—</span>
-        <div class="countdown-lbl">Minutes</div>
+        <div class="countdown-lbl" data-lang="fr">Minutes</div>
+        <div class="countdown-lbl" data-lang="en">Minutes</div>
       </div>
       <div class="countdown-item">
         <span class="countdown-num" id="cd-secs">—</span>
-        <div class="countdown-lbl">Secondes</div>
+        <div class="countdown-lbl" data-lang="fr">Secondes</div>
+        <div class="countdown-lbl" data-lang="en">Seconds</div>
       </div>
     </div>
-    <p style="font-family:'Space Mono',monospace; font-size:0.55rem; letter-spacing:0.2em; color:var(--gray); margin-top:1rem;">Jusqu'à l'ouverture des Jeux Olympiques de Los Angeles 2028</p>
+    <p style="font-family:'Space Mono',monospace; font-size:0.55rem; letter-spacing:0.2em; color:var(--gray); margin-top:1rem;" data-lang="fr">Jusqu'à l'ouverture des Jeux Olympiques de Los Angeles 2028</p>
+    <p style="font-family:'Space Mono',monospace; font-size:0.55rem; letter-spacing:0.2em; color:var(--gray); margin-top:1rem;" data-lang="en">Until the opening of the Los Angeles 2028 Olympic Games</p>
 
     <div class="olympics-goals">
       <div class="olympics-goal-item">
-        <div class="olympics-goal-title">Qualification</div>
-        <div class="olympics-goal-text">Le cycle de qualification pour LA 2028 commence à l'été 2026. Avec son classement #2 mondial, François est en excellente position pour décrocher sa place.</div>
+        <div class="olympics-goal-title" data-lang="fr">Qualification</div>
+        <div class="olympics-goal-title" data-lang="en">Qualification</div>
+        <div class="olympics-goal-text" data-lang="fr">Le cycle de qualification pour LA 2028 commence à l'été 2026. Avec son classement #2 mondial, François est en excellente position pour décrocher sa place.</div>
+        <div class="olympics-goal-text" data-lang="en">The qualification cycle for LA 2028 begins in the summer of 2026. With his #2 world ranking, François is in an excellent position to secure his spot.</div>
       </div>
       <div class="olympics-goal-item">
-        <div class="olympics-goal-title">Objectif médaille</div>
-        <div class="olympics-goal-text">Paris 2024 était une première expérience olympique précieuse. À LA 2028, l'objectif est clair : monter sur le podium et ramener une médaille au Canada.</div>
+        <div class="olympics-goal-title" data-lang="fr">Objectif médaille</div>
+        <div class="olympics-goal-title" data-lang="en">Medal Goal</div>
+        <div class="olympics-goal-text" data-lang="fr">Paris 2024 était une première expérience olympique précieuse. À LA 2028, l'objectif est clair : monter sur le podium et ramener une médaille au Canada.</div>
+        <div class="olympics-goal-text" data-lang="en">Paris 2024 was a valuable first Olympic experience. At LA 2028, the goal is clear: reach the podium and bring a medal back to Canada.</div>
       </div>
       <div class="olympics-goal-item">
-        <div class="olympics-goal-title">La progression</div>
-        <div class="olympics-goal-text">Chaque année, François est meilleur. La trajectoire est indéniable : de bronze en 2021 à double champion Grand Slam en 2025. Le sommet est proche.</div>
+        <div class="olympics-goal-title" data-lang="fr">La progression</div>
+        <div class="olympics-goal-title" data-lang="en">The Trajectory</div>
+        <div class="olympics-goal-text" data-lang="fr">Chaque année, François est meilleur. La trajectoire est indéniable : de bronze en 2021 à double champion Grand Slam en 2025. Le sommet est proche.</div>
+        <div class="olympics-goal-text" data-lang="en">Every year, François gets better. The trajectory is undeniable: from bronze in 2021 to two-time Grand Slam champion in 2025. The summit is within reach.</div>
       </div>
     </div>
   </div>
@@ -1410,33 +1566,41 @@
 
 <!-- LINKS -->
 <section id="links">
-  <span class="section-label reveal" style="text-align:center; display:block;">Suivre François</span>
-  <h2 class="section-title reveal" style="text-align:center;">Liens officiels</h2>
+  <span class="section-label reveal" style="text-align:center; display:block;" data-lang="fr">Suivre François</span>
+  <span class="section-label reveal" style="text-align:center; display:block;" data-lang="en">Follow François</span>
+  <h2 class="section-title reveal" style="text-align:center;" data-lang="fr">Liens officiels</h2>
+  <h2 class="section-title reveal" style="text-align:center;" data-lang="en">Official Links</h2>
   <div class="links-grid reveal">
     <a href="https://www.ijf.org/judoka/32154" target="_blank" rel="noopener" class="link-card">
       <span class="link-icon">🏅</span>
       <div class="link-name">IJF Profile</div>
-      <div class="link-desc">Résultats officiels · Fédération internationale de judo</div>
+      <div class="link-desc" data-lang="fr">Résultats officiels · Fédération internationale de judo</div>
+      <div class="link-desc" data-lang="en">Official results · International Judo Federation</div>
     </a>
     <a href="https://olympic.ca/team-canada/francois-gauthier-drapeau/" target="_blank" rel="noopener" class="link-card">
       <span class="link-icon">🇨🇦</span>
-      <div class="link-name">Équipe Canada</div>
-      <div class="link-desc">Profil officiel · Comité olympique canadien</div>
+      <div class="link-name" data-lang="fr">Équipe Canada</div>
+      <div class="link-name" data-lang="en">Team Canada</div>
+      <div class="link-desc" data-lang="fr">Profil officiel · Comité olympique canadien</div>
+      <div class="link-desc" data-lang="en">Official profile · Canadian Olympic Committee</div>
     </a>
     <a href="https://judocanada.org" target="_blank" rel="noopener" class="link-card">
       <span class="link-icon">🥋</span>
       <div class="link-name">Judo Canada</div>
-      <div class="link-desc">Fédération nationale · Actualités et résultats</div>
+      <div class="link-desc" data-lang="fr">Fédération nationale · Actualités et résultats</div>
+      <div class="link-desc" data-lang="en">National federation · News and results</div>
     </a>
     <a href="https://www.instagram.com/francoisgauthierd" target="_blank" rel="noopener" class="link-card">
       <span class="link-icon">📷</span>
       <div class="link-name">Instagram</div>
-      <div class="link-desc">@francoisgauthierd · Suivre au quotidien</div>
+      <div class="link-desc" data-lang="fr">@francoisgauthierd · Suivre au quotidien</div>
+      <div class="link-desc" data-lang="en">@francoisgauthierd · Follow daily</div>
     </a>
     <a href="https://www.facebook.com/search/top?q=Fran%C3%A7ois%20Gauthier%20Drapeau" target="_blank" rel="noopener" class="link-card">
       <span class="link-icon">👥</span>
       <div class="link-name">Facebook</div>
-      <div class="link-desc">François Gauthier Drapeau · Actualités et photos</div>
+      <div class="link-desc" data-lang="fr">François Gauthier Drapeau · Actualités et photos</div>
+      <div class="link-desc" data-lang="en">François Gauthier Drapeau · News and photos</div>
     </a>
   </div>
 </section>
@@ -1445,17 +1609,25 @@
 <section id="sponsorship">
   <div class="sponsorship-inner">
     <div class="reveal">
-      <span class="section-label" style="color:var(--gold);">Opportunité de partenariat</span>
-      <h2 class="section-title" style="color:var(--gold);">Devenez<br>partenaire</h2>
+      <span class="section-label" style="color:var(--gold);" data-lang="fr">Opportunité de partenariat</span>
+      <span class="section-label" style="color:var(--gold);" data-lang="en">Partnership Opportunity</span>
+      <h2 class="section-title" style="color:var(--gold);" data-lang="fr">Devenez<br>partenaire</h2>
+      <h2 class="section-title" style="color:var(--gold);" data-lang="en">Become a<br>partner</h2>
     </div>
 
     <div class="sponsorship-pitch">
       <div class="reveal">
-        <div class="pitch-text">
+        <div class="pitch-text" data-lang="fr">
           <p>Je suis un athlète de <strong>28 ans</strong>, originaire du Lac-Saint-Jean, au cœur du Québec. Olympien à Paris en 2024, classé <em>#2 mondial</em> en 2025, je me prépare maintenant activement pour les Jeux Olympiques de <strong>Los Angeles 2028</strong>.</p>
           <p>Je m'entraîne à temps plein au <strong>Stade olympique de Montréal</strong>. Diplômé en ingénierie, je poursuis aujourd'hui des études en informatique — un profil unique qui allie <em>excellence sportive, rigueur académique et vision à long terme</em>.</p>
           <p>Mes valeurs fondamentales sont <strong>la discipline</strong> et <strong>la persévérance</strong>. Je m'engage sur des sujets qui me tiennent à cœur : le développement technologique, la durabilité et la responsabilité sociale. Un athlète dont l'image s'aligne naturellement avec des marques ambitieuses.</p>
           <p>Que vous cherchiez à accroître votre visibilité, créer du contenu authentique ou vous associer à l'excellence sportive canadienne, <em>collaborons pour créer quelque chose de mémorable</em>.</p>
+        </div>
+        <div class="pitch-text" data-lang="en">
+          <p>I am a <strong>28-year-old</strong> athlete from the Lac-Saint-Jean region in the heart of Québec. An Olympian in Paris in 2024, ranked <em>#2 in the world</em> in 2025, I am now actively preparing for the <strong>Los Angeles 2028</strong> Olympic Games.</p>
+          <p>I train full-time at the <strong>Olympic Stadium in Montreal</strong>. With an engineering degree and now pursuing studies in computer science, I offer a unique profile combining <em>athletic excellence, academic rigour, and long-term vision</em>.</p>
+          <p>My core values are <strong>discipline</strong> and <strong>perseverance</strong>. I am committed to causes close to my heart: technological development, sustainability, and social responsibility. An athlete whose image aligns naturally with ambitious brands.</p>
+          <p>Whether you are looking to increase your visibility, create authentic content, or associate with Canadian athletic excellence, <em>let's collaborate to create something memorable</em>.</p>
         </div>
       </div>
 
@@ -1463,81 +1635,108 @@
         <div class="pitch-value-item">
           <span class="pitch-value-icon">🏆</span>
           <div>
-            <div class="pitch-value-title">Image d'excellence</div>
-            <div class="pitch-value-desc">Compétitionnant au plus haut niveau mondial, j'incarne l'excellence, la discipline et la constance — des valeurs qui rejaillissent sur les partenaires.</div>
+            <div class="pitch-value-title" data-lang="fr">Image d'excellence</div>
+            <div class="pitch-value-title" data-lang="en">Image of Excellence</div>
+            <div class="pitch-value-desc" data-lang="fr">Compétitionnant au plus haut niveau mondial, j'incarne l'excellence, la discipline et la constance — des valeurs qui rejaillissent sur les partenaires.</div>
+            <div class="pitch-value-desc" data-lang="en">Competing at the highest world level, I embody excellence, discipline, and consistency — values that reflect positively on partners.</div>
           </div>
         </div>
         <div class="pitch-value-item">
           <span class="pitch-value-icon">🌍</span>
           <div>
-            <div class="pitch-value-title">Visibilité internationale</div>
-            <div class="pitch-value-desc">Présence sur la scène mondiale lors des Grand Slams IJF (Paris, Tokyo, Abu Dhabi…) et des Jeux Olympiques — une couverture médiatique internationale.</div>
+            <div class="pitch-value-title" data-lang="fr">Visibilité internationale</div>
+            <div class="pitch-value-title" data-lang="en">International Visibility</div>
+            <div class="pitch-value-desc" data-lang="fr">Présence sur la scène mondiale lors des Grand Slams IJF (Paris, Tokyo, Abu Dhabi…) et des Jeux Olympiques — une couverture médiatique internationale.</div>
+            <div class="pitch-value-desc" data-lang="en">Presence on the world stage at IJF Grand Slams (Paris, Tokyo, Abu Dhabi…) and the Olympic Games — international media coverage.</div>
           </div>
         </div>
         <div class="pitch-value-item">
           <span class="pitch-value-icon">📍</span>
           <div>
-            <div class="pitch-value-title">Visibilité locale</div>
-            <div class="pitch-value-desc">Présence établie et reconnue dans ma communauté du Lac-Saint-Jean et dans les médias québécois, Radio-Canada, TVA Sports et plus.</div>
+            <div class="pitch-value-title" data-lang="fr">Visibilité locale</div>
+            <div class="pitch-value-title" data-lang="en">Local Visibility</div>
+            <div class="pitch-value-desc" data-lang="fr">Présence établie et reconnue dans ma communauté du Lac-Saint-Jean et dans les médias québécois, Radio-Canada, TVA Sports et plus.</div>
+            <div class="pitch-value-desc" data-lang="en">Established and recognized presence in my Lac-Saint-Jean community and in Quebec media, Radio-Canada, TVA Sports and more.</div>
           </div>
         </div>
         <div class="pitch-value-item">
           <span class="pitch-value-icon">📱</span>
           <div>
-            <div class="pitch-value-title">Audience engagée</div>
-            <div class="pitch-value-desc">Une communauté active sur les réseaux sociaux qui suit mon parcours, mes entraînements et mes compétitions — une audience authentique et fidèle.</div>
+            <div class="pitch-value-title" data-lang="fr">Audience engagée</div>
+            <div class="pitch-value-title" data-lang="en">Engaged Audience</div>
+            <div class="pitch-value-desc" data-lang="fr">Une communauté active sur les réseaux sociaux qui suit mon parcours, mes entraînements et mes compétitions — une audience authentique et fidèle.</div>
+            <div class="pitch-value-desc" data-lang="en">An active social media community following my journey, training sessions, and competitions — an authentic and loyal audience.</div>
           </div>
         </div>
         <div class="pitch-value-item">
           <span class="pitch-value-icon">🤝</span>
           <div>
-            <div class="pitch-value-title">Représentation de marque</div>
-            <div class="pitch-value-desc">Intégration des partenaires dans des environnements de compétition, d'entraînement et de performance — un contexte fort et mémorable.</div>
+            <div class="pitch-value-title" data-lang="fr">Représentation de marque</div>
+            <div class="pitch-value-title" data-lang="en">Brand Representation</div>
+            <div class="pitch-value-desc" data-lang="fr">Intégration des partenaires dans des environnements de compétition, d'entraînement et de performance — un contexte fort et mémorable.</div>
+            <div class="pitch-value-desc" data-lang="en">Integration of partners into competition, training, and performance environments — a powerful and memorable context.</div>
           </div>
         </div>
       </div>
     </div>
 
-    <div class="tiers-title reveal">Niveaux de partenariat — tout est adaptable à vos besoins</div>
+    <div class="tiers-title reveal" data-lang="fr">Niveaux de partenariat — tout est adaptable à vos besoins</div>
+    <div class="tiers-title reveal" data-lang="en">Partnership tiers — everything is adaptable to your needs</div>
     <div class="tiers-grid reveal">
       <div class="tier-card tier-bronze">
         <span class="tier-medal">🥉</span>
-        <div class="tier-name">Bronze</div>
+        <div class="tier-name" data-lang="fr">Bronze</div>
+        <div class="tier-name" data-lang="en">Bronze</div>
         <ul class="tier-features">
-          <li>Visibilité du logo / de la marque</li>
-          <li>Intégration dans certains contenus</li>
-          <li>Présence sur les médias sociaux</li>
+          <li data-lang="fr">Visibilité du logo / de la marque</li>
+          <li data-lang="en">Logo / brand visibility</li>
+          <li data-lang="fr">Intégration dans certains contenus</li>
+          <li data-lang="en">Integration into select content</li>
+          <li data-lang="fr">Présence sur les médias sociaux</li>
+          <li data-lang="en">Social media presence</li>
         </ul>
       </div>
       <div class="tier-card tier-silver">
         <span class="tier-medal">🥈</span>
-        <div class="tier-name">Argent</div>
+        <div class="tier-name" data-lang="fr">Argent</div>
+        <div class="tier-name" data-lang="en">Silver</div>
         <ul class="tier-features">
-          <li>Création de contenu dédié (photos, vidéos)</li>
-          <li>Placements de produits</li>
-          <li>Collaboration sur des campagnes promotionnelles</li>
+          <li data-lang="fr">Création de contenu dédié (photos, vidéos)</li>
+          <li data-lang="en">Dedicated content creation (photos, videos)</li>
+          <li data-lang="fr">Placements de produits</li>
+          <li data-lang="en">Product placements</li>
+          <li data-lang="fr">Collaboration sur des campagnes promotionnelles</li>
+          <li data-lang="en">Collaboration on promotional campaigns</li>
         </ul>
       </div>
       <div class="tier-card tier-gold">
         <span class="tier-medal">🥇</span>
-        <div class="tier-name">Or</div>
+        <div class="tier-name" data-lang="fr">Or</div>
+        <div class="tier-name" data-lang="en">Gold</div>
         <div class="tier-badge">Premium</div>
         <ul class="tier-features">
-          <li>Participations à des événements corporatifs</li>
-          <li>Conférences et présentations</li>
-          <li>Démonstrations / initiations au judo</li>
+          <li data-lang="fr">Participations à des événements corporatifs</li>
+          <li data-lang="en">Corporate event appearances</li>
+          <li data-lang="fr">Conférences et présentations</li>
+          <li data-lang="en">Conferences and presentations</li>
+          <li data-lang="fr">Démonstrations / initiations au judo</li>
+          <li data-lang="en">Judo demonstrations / introductory sessions</li>
         </ul>
       </div>
     </div>
 
-    <p class="reveal" style="text-align:center; font-size:1rem; color:var(--text-body); font-style:italic; margin-bottom:3rem; border: 1px solid rgba(212,175,55,0.2); padding: 1rem 2rem; display:inline-block; width:100%; background: rgba(212,175,55,0.04);">Les services ci-dessus sont à titre d'exemple. Tout peut être adapté aux besoins et objectifs spécifiques du partenaire.</p>
+    <p class="reveal" style="text-align:center; font-size:1rem; color:var(--text-body); font-style:italic; margin-bottom:3rem; border: 1px solid rgba(212,175,55,0.2); padding: 1rem 2rem; display:inline-block; width:100%; background: rgba(212,175,55,0.04);" data-lang="fr">Les services ci-dessus sont à titre d'exemple. Tout peut être adapté aux besoins et objectifs spécifiques du partenaire.</p>
+    <p class="reveal" style="text-align:center; font-size:1rem; color:var(--text-body); font-style:italic; margin-bottom:3rem; border: 1px solid rgba(212,175,55,0.2); padding: 1rem 2rem; display:inline-block; width:100%; background: rgba(212,175,55,0.04);" data-lang="en">The above services are examples only. Everything can be tailored to the specific needs and goals of the partner.</p>
 
     <div class="sponsor-cta-block reveal">
-      <p class="sponsor-cta-eyebrow">Créons de la valeur ensemble</p>
-      <h3 class="sponsor-cta-title">Contactez-moi !</h3>
-      <p class="sponsor-cta-sub">Vous avez une idée de collaboration ? Discutons-en — chaque partenariat est unique et personnalisé.</p>
+      <p class="sponsor-cta-eyebrow" data-lang="fr">Créons de la valeur ensemble</p>
+      <p class="sponsor-cta-eyebrow" data-lang="en">Let's create value together</p>
+      <h3 class="sponsor-cta-title" data-lang="fr">Contactez-moi !</h3>
+      <h3 class="sponsor-cta-title" data-lang="en">Get in touch!</h3>
+      <p class="sponsor-cta-sub" data-lang="fr">Vous avez une idée de collaboration ? Discutons-en — chaque partenariat est unique et personnalisé.</p>
+      <p class="sponsor-cta-sub" data-lang="en">Have an idea for a collaboration? Let's talk — every partnership is unique and tailored.</p>
       <div class="sponsor-contact-wrap">
-        <a href="/cdn-cgi/l/email-protection#5a3c283b3431233835236b6a1a32352e373b333674393b" class="sponsor-btn btn-gold">✉ <span class="__cf_email__" data-cfemail="56302437383d2f34392f6766163e39223b373f3a783537">[email&#160;protected]</span></a>
+        <a href="mailto:francois@gauthierdrapeau.com" class="sponsor-btn btn-gold">✉ francois@gauthierdrapeau.com</a>
         <a href="https://www.instagram.com/francoisgauthierd" target="_blank" rel="noopener" class="sponsor-btn btn-outline">📷 @francoisgauthierd</a>
       </div>
     </div>
@@ -1548,16 +1747,33 @@
 <footer>
   <div class="footer-logo">FGD<span>.</span></div>
   <div class="footer-credits">
-    François Gauthier-Drapeau — Judoka Canadien · –81 kg · #2 Mondial 2025<br>
-    Sources: <a href="https://www.ijf.org/judoka/32154" target="_blank">IJF</a> ·
-    <a href="https://olympic.ca/team-canada/francois-gauthier-drapeau/" target="_blank">Équipe Canada</a> ·
+    <span data-lang="fr">François Gauthier-Drapeau — Judoka Canadien · –81 kg · #2 Mondial 2025</span>
+    <span data-lang="en">François Gauthier-Drapeau — Canadian Judoka · –81 kg · #2 World Ranking 2025</span><br>
+    <span data-lang="fr">Sources :</span><span data-lang="en">Sources:</span>
+    <a href="https://www.ijf.org/judoka/32154" target="_blank">IJF</a> ·
+    <a href="https://olympic.ca/team-canada/francois-gauthier-drapeau/" target="_blank" data-lang="fr">Équipe Canada</a>
+    <a href="https://olympic.ca/team-canada/francois-gauthier-drapeau/" target="_blank" data-lang="en">Team Canada</a> ·
     <a href="https://judocanada.org" target="_blank">Judo Canada</a> ·
     <a href="https://en.wikipedia.org/wiki/Fran%C3%A7ois_Gauthier-Drapeau" target="_blank">Wikipedia</a><br>
-    Site non-officiel — Créé à des fins de présentation | 2025
+    <span data-lang="fr">Site non-officiel — Créé à des fins de présentation | 2025</span>
+    <span data-lang="en">Unofficial site — Created for presentation purposes | 2025</span>
   </div>
 </footer>
 
 <script>
+  // Language toggle
+  function setLang(lang) {
+    document.getElementById('htmlRoot').setAttribute('lang', lang);
+    document.getElementById('btnFr').classList.toggle('active', lang === 'fr');
+    document.getElementById('btnEn').classList.toggle('active', lang === 'en');
+    try { localStorage.setItem('fgd-lang', lang); } catch(e) {}
+  }
+  // Restore saved preference
+  try {
+    const saved = localStorage.getItem('fgd-lang');
+    if (saved === 'en') setLang('en');
+  } catch(e) {}
+
   // Banner close
   const banner = document.getElementById('sponsorBanner');
   const nav = document.getElementById('mainNav');
