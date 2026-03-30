@@ -60,9 +60,19 @@
   .lang-divider { width: 1px; height: 100%; background: rgba(255,255,255,0.15); }
 
   /* Hide/show language content */
-  [data-lang="en"] { display: none; }
-  html[lang="en"] [data-lang="en"] { display: revert; }
-  html[lang="en"] [data-lang="fr"] { display: none; }
+  [data-lang="en"] { display: none !important; }
+  html[lang="en"] [data-lang="en"] { display: block !important; }
+  html[lang="en"] [data-lang="fr"] { display: none !important; }
+  /* Inline elements need inline display not block */
+  html[lang="en"] span[data-lang="en"],
+  html[lang="en"] a[data-lang="en"],
+  html[lang="en"] cite[data-lang="en"],
+  html[lang="en"] strong[data-lang="en"],
+  html[lang="en"] em[data-lang="en"] { display: inline !important; }
+  /* inline-block elements */
+  html[lang="en"] .hero-eyebrow[data-lang="en"],
+  html[lang="en"] .hero-badge[data-lang="en"],
+  html[lang="en"] .hero-tagline[data-lang="en"] { display: inline-block !important; }
 
   /* ── SPONSOR BANNER ── */
   .sponsor-banner {
@@ -1736,7 +1746,7 @@
       <p class="sponsor-cta-sub" data-lang="fr">Vous avez une idée de collaboration ? Discutons-en — chaque partenariat est unique et personnalisé.</p>
       <p class="sponsor-cta-sub" data-lang="en">Have an idea for a collaboration? Let's talk — every partnership is unique and tailored.</p>
       <div class="sponsor-contact-wrap">
-        <a href="mailto:francois@gauthierdrapeau.com" class="sponsor-btn btn-gold">✉ francois@gauthierdrapeau.com</a>
+        <a href="/cdn-cgi/l/email-protection#9cfaeefdf2fff3f5efdcfbfde9e8f4f5f9eef8eefdecf9fde9b2fff3f1" class="sponsor-btn btn-gold">✉ <span class="__cf_email__" data-cfemail="432531222d202c2a3003242236372b2a2631273122332622366d202c2e">[email&#160;protected]</span></a>
         <a href="https://www.instagram.com/francoisgauthierd" target="_blank" rel="noopener" class="sponsor-btn btn-outline">📷 @francoisgauthierd</a>
       </div>
     </div>
@@ -1760,7 +1770,7 @@
   </div>
 </footer>
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
   // Language toggle
   function setLang(lang) {
     document.getElementById('htmlRoot').setAttribute('lang', lang);
@@ -1808,9 +1818,4 @@
     }
     document.getElementById('cd-days').textContent  = String(Math.floor(diff / 86400000)).padStart(3, '0');
     document.getElementById('cd-hours').textContent = String(Math.floor((diff % 86400000) / 3600000)).padStart(2, '0');
-    document.getElementById('cd-mins').textContent  = String(Math.floor((diff % 3600000) / 60000)).padStart(2, '0');
-    document.getElementById('cd-secs').textContent  = String(Math.floor((diff % 60000) / 1000)).padStart(2, '0');
-  }
-  updateCountdown();
-  setInterval(updateCountdown, 1000);
-</script>
+    document.getElementById('cd-mins').text
