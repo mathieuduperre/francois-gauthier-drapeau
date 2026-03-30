@@ -938,7 +938,7 @@
   <span data-lang="en">Associate your brand with a Canadian Olympian</span>
   <a href="#sponsorship" class="cta" data-lang="fr">Découvrir →</a>
   <a href="#sponsorship" class="cta" data-lang="en">Learn more →</a>
-  <button class="banner-close" id="closeBanner" style="z-index:10; padding: 0.5rem 0.8rem;">✕</button>
+  <button class="banner-close" id="closeBanner" style="z-index:10; padding: 0.5rem 0.8rem;" onclick="document.getElementById('sponsorBanner').style.display='none'; document.getElementById('mainNav').classList.add('no-banner');">✕</button>
 </div>
 
 <!-- NAV -->
@@ -1796,14 +1796,13 @@
   document.getElementById('btnFr').addEventListener('click', () => setLang('fr'));
   document.getElementById('btnEn').addEventListener('click', () => setLang('en'));
 
-  // Run on page load — hide all EN elements immediately, then check saved preference
-  document.querySelectorAll('[data-lang="en"]').forEach(el => { el.style.display = 'none'; });
-
-  // Restore saved preference
+  // Run on page load — determine language and apply consistently
+  let initialLang = 'fr';
   try {
     const saved = localStorage.getItem('fgd-lang');
-    if (saved === 'en') setLang('en');
+    if (saved === 'en') initialLang = 'en';
   } catch(e) {}
+  setLang(initialLang);
 
   // Banner close
   const banner = document.getElementById('sponsorBanner');
